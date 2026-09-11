@@ -200,3 +200,166 @@ body {
     50% { transform: scale(1.04); }
     100% { transform: scale(1); }
 }
+
+
+        body{
+            font-family:"Segoe UI",sans-serif;
+
+            padding:
+                env(safe-area-inset-top)
+                env(safe-area-inset-right)
+                env(safe-area-inset-bottom)
+                env(safe-area-inset-left);
+        }
+
+        .login-container{
+            min-height:100vh;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            padding:24px;
+        }
+
+        .login-card{
+            width:100%;
+            text-align:center;
+        }
+
+        .language-switch{
+
+            display:flex;
+            justify-content:center;
+            gap:10px;
+
+            margin-bottom:40px;
+        }
+
+        .language-btn{
+
+            border:none;
+
+            cursor:pointer;
+
+            padding:8px 14px;
+
+            border-radius:12px;
+
+            background:rgba(255,255,255,.05);
+
+            border:1px solid var(--color-panel-border);
+
+            color:var(--color-text);
+
+            font-size:12px;
+
+            font-weight:600;
+        }
+
+        .language-btn.active{
+
+            color:white;
+
+            border-color:var(--color-accent);
+
+            background:
+                rgba(96,165,250,.18);
+        }
+
+        .app-title{
+
+            color:var(--color-title);
+
+            font-size:38px;
+
+            font-weight:700;
+
+            margin-bottom:16px;
+        }
+
+        .app-subtitle{
+
+            color:var(--color-text);
+
+            font-size:15px;
+
+            line-height:1.6;
+
+            max-width:320px;
+
+            margin:0 auto 40px auto;
+        }
+
+        .logo-wrapper{
+
+            margin-bottom:12px;
+        }
+
+        .fingerprint-btn{
+
+            border:none;
+
+            background:transparent;
+
+            cursor:pointer;
+
+            padding:0;
+        }
+
+        .fingerprint{
+
+            width:90px;
+
+            max-width:100%;
+
+            filter:
+                drop-shadow(0 0 10px rgba(96,165,250,.35))
+                drop-shadow(0 0 24px rgba(96,165,250,.20));
+
+            animation:pulse 2.5s infinite;
+
+            transition:.25s ease;
+        }
+
+        .fingerprint-btn:active .fingerprint{
+
+            transform:scale(.94);
+        }
+
+        .touch-text{
+
+            color:var(--color-text);
+
+            font-size:12px;
+
+            letter-spacing:1px;
+
+            margin-top:8px;
+        }
+
+        .version{
+
+            margin-top:50px;
+
+            color:var(--color-icon-muted);
+
+            font-size:12px;
+        }
+
+        @keyframes pulse{
+
+            0%{
+                transform:scale(1);
+            }
+
+            50%{
+                transform:scale(1.04);
+            }
+
+            100%{
+                transform:scale(1);
+            }
+
+        }
+
