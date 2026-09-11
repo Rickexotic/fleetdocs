@@ -61,7 +61,7 @@
             <p
                 id="touchText"
                 class="touch-text">
-                Fingerprint to continue
+                Tap fingerprint to continue
             </p>
 
             <!-- Language selector -->
@@ -97,7 +97,7 @@
                     "Store, organize and monitor all your vehicle documents with automated expiration alerts and secure digital access.",
 
                 touch:
-                    "Fingerprint to continue"
+                    "Tap fingerprint to continue"
 
             },
 
@@ -148,12 +148,13 @@
 
         setLanguage(savedLanguage);
 
-        function ingresar(){
+       async function ingresar(){
 
-            window.location.href =
-                "dashboard.html";
+    // Future biometric auth
 
-        }
+    window.location.href = "dashboard.html";
+
+}
 
         if("serviceWorker" in navigator){
 
