@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="./css/app.css"> 
 
 <style>
-
 body{
     font-family: "Segoe UI", sans-serif;
 }
@@ -26,22 +25,14 @@ body{
 }
 
 .login-card{
-
     width:100%;
     max-width:420px;
-
     padding:40px 30px;
-
     background:var(--color-panel);
-
     border:1px solid var(--color-panel-border);
-
     border-radius:28px;
-
     backdrop-filter:blur(12px);
-
     box-shadow:var(--shadow-card);
-
     text-align:center;
 }
 
@@ -49,149 +40,83 @@ body{
     margin-bottom:24px;
 }
 
-.logo-wrapper img{
+/* NEW: fingerprint as button */
+.fingerprint-btn{
+    border:none;
+    background:transparent;
+    padding:0;
+    cursor:pointer;
+}
 
-    width:140px;
+.fingerprint{
+    width:110px; /* a bit smaller than before (was 140px on logo-wrapper img) */
     max-width:100%;
-
     filter:
         drop-shadow(0 0 12px rgba(96,165,250,.30))
         drop-shadow(0 0 30px rgba(96,165,250,.20));
-
     animation:pulse 2.5s infinite;
+    transition:transform .2s ease, filter .2s ease;
+}
+
+.fingerprint-btn:hover .fingerprint{
+    transform:scale(1.05);
+    filter:
+        drop-shadow(0 0 16px rgba(96,165,250,.40))
+        drop-shadow(0 0 34px rgba(96,165,250,.24));
+}
+
+.fingerprint-btn:active .fingerprint{
+    transform:scale(0.98);
 }
 
 @keyframes pulse {
-
-    0%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.05);
-    }
-
-    100%{
-        transform:scale(1);
-    }
-
+    0%{ transform:scale(1); }
+    50%{ transform:scale(1.05); }
+    100%{ transform:scale(1); }
 }
 
 .app-title{
-
     color:var(--color-title);
-
     font-size:32px;
-
     font-weight:700;
-
     margin-bottom:10px;
 }
 
 .app-subtitle{
-
     color:var(--color-text);
-
     font-size:15px;
-
     line-height:1.5;
-
     margin-bottom:35px;
 }
 
 .features{
-
     margin-bottom:30px;
-
     text-align:left;
 }
 
+/* Keep feature rows, remove icon layout dependency */
 .feature{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
     margin-bottom:14px;
-
     color:var(--color-text);
-
     font-size:14px;
 }
 
+/* Icons removed from layout */
 .feature-icon{
-
-    width:34px;
-    height:34px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:12px;
-
-    background:rgba(255,255,255,.05);
-
-    color:var(--color-accent);
-
-    flex-shrink:0;
-}
-
-.btn-login{
-
-    width:100%;
-
-    height:56px;
-
-    border:none;
-
-    border-radius:16px;
-
-    background:linear-gradient(
-        135deg,
-        #2563eb,
-        #60a5fa
-    );
-
-    color:white;
-
-    font-size:16px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.25s;
-}
-
-.btn-login:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 0 16px rgba(96,165,250,.35);
+    display:none;
 }
 
 .version{
-
     margin-top:24px;
-
     color:var(--color-text);
-
     font-size:12px;
 }
 
 .footer-text{
-
     margin-top:10px;
-
     color:var(--color-icon-muted);
-
     font-size:12px;
 }
-
 </style>
 
 </head>
@@ -199,17 +124,17 @@ body{
 <body>
 
 <div class="login-container">
-
     <div class="login-card">
 
         <div class="logo-wrapper">
+            <button class="fingerprint-btn" onclick="ingresar()" aria-label="Ingresar">
+                <img
+                    src="images/huella_blanco.png"
+                    alt="Huella Digital"
+                    class="fingerprint">
+            </button>
+        </div>
 
-          <img
-    src="images/huella_blanco.png"
-    alt="Huella Digital"
-    class="fingerprint">
-            
-        
         <p class="app-subtitle">
             Gestión documental vehicular.
             Controla permisos, seguros, revisiones técnicas,
@@ -217,91 +142,38 @@ body{
         </p>
 
         <div class="features">
-
             <div class="feature">
-
-                <div class="feature-icon">
-                    🚗
-                </div>
-
-                <span>
-                    Gestión de múltiples vehículos.
-                </span>
-
+                <span>Gestión de múltiples vehículos.</span>
             </div>
-
             <div class="feature">
-
-                <div class="feature-icon">
-                    📄
-                </div>
-
-                <span>
-                    Respaldo digital de documentos.
-                </span>
-
+                <span>Respaldo digital de documentos.</span>
             </div>
-
             <div class="feature">
-
-                <div class="feature-icon">
-                    📅
-                </div>
-
-                <span>
-                    Control automático de vencimientos.
-                </span>
-
+                <span>Control automático de vencimientos.</span>
             </div>
-
             <div class="feature">
-
-                <div class="feature-icon">
-                    🔔
-                </div>
-
-                <span>
-                    Alertas por correo electrónico.
-                </span>
-
+                <span>Alertas por correo electrónico.</span>
             </div>
-
         </div>
 
-        <button
-            class="btn-login"
-            onclick="ingresar()">
-
-            INGRESAR
-
-        </button>
+        <!-- Removed old INGRESAR button -->
 
         <div class="version">
-
             FleetDocs V1.0
-
         </div>
 
         <div class="footer-text">
-
             Sistema de administración documental vehicular
-
         </div>
 
     </div>
-
 </div>
 
 <script>
-
 function ingresar(){
-
     window.location.href="dashboard.html";
-
 }
-
 </script>
 
 </body>
-
 </html>
