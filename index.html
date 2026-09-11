@@ -1,159 +1,377 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>FleetDocs</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<link rel="stylesheet" href="./css/style.css">
-<link rel="stylesheet" href="./css/app.css"> 
+    <title>FleetDocs</title>
 
-<style>
-body{
-    font-family: "Segoe UI", sans-serif;
-}
+    <!-- PWA -->
+    <meta name="theme-color" content="#050816">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FleetDocs">
 
-.login-container{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-}
+    ./manifest.json
 
-.login-card{
-    width:100%;
-    max-width:420px;
-    padding:40px 30px;
-    background:var(--color-panel);
-    border:1px solid var(--color-panel-border);
-    border-radius:28px;
-    backdrop-filter:blur(12px);
-    box-shadow:var(--shadow-card);
-    text-align:center;
-}
+    <!-- Styles -->
+    ./css/style.css
+    <link/app.css
 
-.logo-wrapper{
-    margin-bottom:24px;
-}
+    <style>
 
-/* NEW: fingerprint as button */
-.fingerprint-btn{
-    border:none;
-    background:transparent;
-    padding:0;
-    cursor:pointer;
-}
+        body{
+            font-family:"Segoe UI",sans-serif;
 
-.fingerprint{
-    width:110px; /* a bit smaller than before (was 140px on logo-wrapper img) */
-    max-width:100%;
-    filter:
-        drop-shadow(0 0 12px rgba(96,165,250,.30))
-        drop-shadow(0 0 30px rgba(96,165,250,.20));
-    animation:pulse 2.5s infinite;
-    transition:transform .2s ease, filter .2s ease;
-}
+            padding:
+                env(safe-area-inset-top)
+                env(safe-area-inset-right)
+                env(safe-area-inset-bottom)
+                env(safe-area-inset-left);
+        }
 
-.fingerprint-btn:hover .fingerprint{
-    transform:scale(1.05);
-    filter:
-        drop-shadow(0 0 16px rgba(96,165,250,.40))
-        drop-shadow(0 0 34px rgba(96,165,250,.24));
-}
+        .login-container{
+            min-height:100vh;
 
-.fingerprint-btn:active .fingerprint{
-    transform:scale(0.98);
-}
+            display:flex;
+            align-items:center;
+            justify-content:center;
 
-@keyframes pulse {
-    0%{ transform:scale(1); }
-    50%{ transform:scale(1.05); }
-    100%{ transform:scale(1); }
-}
+            padding:24px;
+        }
 
-.app-title{
-    color:var(--color-title);
-    font-size:32px;
-    font-weight:700;
-    margin-bottom:10px;
-}
+        .login-card{
+            width:100%;
+            text-align:center;
+        }
 
-.app-subtitle{
-    color:var(--color-text);
-    font-size:15px;
-    line-height:1.5;
-    margin-bottom:35px;
-}
+        .language-switch{
 
-.features{
-    margin-bottom:30px;
-    text-align:left;
-}
+            display:flex;
+            justify-content:center;
+            gap:10px;
 
-/* Keep feature rows, remove icon layout dependency */
-.feature{
-    margin-bottom:14px;
-    color:var(--color-text);
-    font-size:14px;
-}
+            margin-bottom:40px;
+        }
 
-/* Icons removed from layout */
-.feature-icon{
-    display:none;
-}
+        .language-btn{
 
-.version{
-    margin-top:24px;
-    color:var(--color-text);
-    font-size:12px;
-}
+            border:none;
 
-.footer-text{
-    margin-top:10px;
-    color:var(--color-icon-muted);
-    font-size:12px;
-}
-</style>
+            cursor:pointer;
+
+            padding:8px 14px;
+
+            border-radius:12px;
+
+            background:rgba(255,255,255,.05);
+
+            border:1px solid var(--color-panel-border);
+
+            color:var(--color-text);
+
+            font-size:12px;
+
+            font-weight:600;
+        }
+
+        .language-btn.active{
+
+            color:white;
+
+            border-color:var(--color-accent);
+
+            background:
+                rgba(96,165,250,.18);
+        }
+
+        .app-title{
+
+            color:var(--color-title);
+
+            font-size:38px;
+
+            font-weight:700;
+
+            margin-bottom:16px;
+        }
+
+        .app-subtitle{
+
+            color:var(--color-text);
+
+            font-size:15px;
+
+            line-height:1.6;
+
+            max-width:320px;
+
+            margin:0 auto 40px auto;
+        }
+
+        .logo-wrapper{
+
+            margin-bottom:12px;
+        }
+
+        .fingerprint-btn{
+
+            border:none;
+
+            background:transparent;
+
+            cursor:pointer;
+
+            padding:0;
+        }
+
+        .fingerprint{
+
+            width:90px;
+
+            max-width:100%;
+
+            filter:
+                drop-shadow(0 0 10px rgba(96,165,250,.35))
+                drop-shadow(0 0 24px rgba(96,165,250,.20));
+
+            animation:pulse 2.5s infinite;
+
+            transition:.25s ease;
+        }
+
+        .fingerprint-btn:active .fingerprint{
+
+            transform:scale(.94);
+        }
+
+        .touch-text{
+
+            color:var(--color-text);
+
+            font-size:12px;
+
+            letter-spacing:1px;
+
+            text-transform:uppercase;
+
+            margin-top:8px;
+        }
+
+        .version{
+
+            margin-top:50px;
+
+            color:var(--color-icon-muted);
+
+            font-size:12px;
+        }
+
+        @keyframes pulse{
+
+            0%{
+                transform:scale(1);
+            }
+
+            50%{
+                transform:scale(1.04);
+            }
+
+            100%{
+                transform:scale(1);
+            }
+
+        }
+
+    </style>
 
 </head>
 
 <body>
 
-<div class="login-container">
-    <div class="login-card">
+    <div class="login-container">
 
-       
-        <p class="app-subtitle">
-            Vehicle Document Management
-            Store, organize, and monitor all your vehicle documentation with automated expiration alerts and secure digital access.
-        </p>
+        <div class="login-card">
 
- <div class="logo-wrapper">
-            <button class="fingerprint-btn" onclick="ingresar()" aria-label="Ingresar">
-                <img
-                    src="images/huella_blanco.png"
-                    alt="Huella Digital"
-                    class="fingerprint">
-            </button>
+            <!-- Language selector -->
+
+            <div class="language-switch">
+
+                <button
+                    id="btn-en"
+                    class="language-btn active"
+                    onclick="setLanguage('en')">
+
+                    EN
+
+                </button>
+
+                <button
+                    id="btn-es"
+                    class="language-btn"
+                    onclick="setLanguage('es')">
+
+                    ES
+
+                </button>
+
+            </div>
+
+            <!-- App title -->
+
+            <h1 class="app-title">
+
+                FleetDocs
+
+            </h1>
+
+            <!-- App description -->
+
+            <p
+                id="subtitle"
+                class="app-subtitle">
+
+                Store, organize and monitor all your vehicle documents with automated expiration alerts and secure digital access.
+
+            </p>
+
+            <!-- Fingerprint -->
+
+            <div class="logo-wrapper">
+
+                <button
+                    class="fingerprint-btn"
+                    onclick="ingresar()"
+                    aria-label="Login">
+
+                    ./images/huella_blanco.png
+
+                </button>
+
+            </div>
+
+            <p
+                id="touchText"
+                class="touch-text">
+
+                Tap fingerprint to continue
+
+            </p>
+
+            <div class="version">
+
+                FleetDocs v1.0
+
+            </div>
+
         </div>
 
- <div class="version">
-            Tap fingerprint to continue
-        </div>
-
-                    
     </div>
-</div>
 
-<script>
-function ingresar(){
-    window.location.href="dashboard.html";
-}
-</script>
+    <script>
+
+        const texts = {
+
+            en: {
+
+                subtitle:
+                    "Store, organize and monitor all your vehicle documents with automated expiration alerts and secure digital access.",
+
+                touch:
+                    "Tap fingerprint to continue"
+
+            },
+
+            es: {
+
+                subtitle:
+                    "Almacena, organiza y controla toda la documentación de tus vehículos con alertas automáticas de vencimiento y acceso digital seguro.",
+
+                touch:
+                    "Toque la huella para continuar"
+
+            }
+
+        };
+
+        function setLanguage(lang){
+
+            document.getElementById("subtitle").textContent =
+                texts[lang].subtitle;
+
+            document.getElementById("touchText").textContent =
+                texts[lang].touch;
+
+            document.documentElement.lang = lang;
+
+            document
+                .getElementById("btn-en")
+                .classList.remove("active");
+
+            document
+                .getElementById("btn-es")
+                .classList.remove("active");
+
+            document
+                .getElementById("btn-" + lang)
+                .classList.add("active");
+
+            localStorage.setItem(
+                "fleetdocs-language",
+                lang
+            );
+        }
+
+        const savedLanguage =
+            localStorage.getItem(
+                "fleetdocs-language"
+            ) || "en";
+
+        setLanguage(savedLanguage);
+
+        function ingresar(){
+
+            window.location.href =
+                "dashboard.html";
+
+        }
+
+        if("serviceWorker" in navigator){
+
+            window.addEventListener(
+                "load",
+                () => {
+
+                    navigator.serviceWorker
+                        .register("./service-worker.js")
+                        .then(() => {
+
+                            console.log(
+                                "Service Worker registered"
+                            );
+
+                        })
+                        .catch(error => {
+
+                            console.error(
+                                "Service Worker error:",
+                                error
+                            );
+
+                        });
+
+                }
+            );
+
+        }
+
+    </script>
 
 </body>
+
 </html>
