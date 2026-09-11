@@ -1,322 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+  />
+  <title>FleetDocs - Dashboard</title>
 
-    <title>FleetDocs - Dashboard</title>
+  <!-- PWA -->
+  <meta name="theme-color" content="#050816" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="FleetDocs" />
+  <link rel="manifest" href="./manifest.json" />
 
-    <!-- PWA -->
-    <meta name="theme-color" content="#050816">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="FleetDocs">
-    <link rel="manifest" href="./manifest.json">
+  <!-- Styles -->
+  <link rel="stylesheet" href="./css/main.css?v=4" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="./css/main.css?v=4">
+  <style>
+    /* Layout tuning to reduce excessive height and bring dots upward */
+    .dashboard-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 0;
+      padding-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    .dashboard-page {
+      min-width: 100%;
+      scroll-snap-align: start;
+      box-sizing: border-box;
+    }
+
+    /* Header image (Bean.jpg) */
+    .profile-thumb {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      object-fit: cover;
+      margin-left: auto;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* Vehicle image strip */
+    .vehicle-image-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .vehicle-image-strip img {
+      width: 100%;
+      height: 68px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Cards: reduce vertical size */
+    .info-cards,
+    .documents-list,
+    .maintenance-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .glass-card {
+      padding: 10px 12px;
+      min-height: 64px;
+      border-radius: 14px;
+    }
+
+    .doc-card,
+    .maintenance-card {
+      min-height: 58px;
+    }
+
+    .card-title {
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .card-description {
+      line-height: 1.2;
+      margin: 1px 0;
+    }
+
+    /* Dots higher */
+    .carousel-dots {
+      margin-top: 6px;
+      margin-bottom: 8px;
+    }
+
+    /* Ensure bottom nav links are valid structure */
+    .bottom-nav .nav-item {
+      text-decoration: none;
+    }
+  </style>
 </head>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
- 
 <body>
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="page-title">Dashboard</div>
+    <img src="./images/Bean.jpg" alt="Profile" class="profile-thumb" />
+  </header>
 
-    <!-- HEADER -->
+  <!-- VEHICLE SELECTOR -->
+  <section class="vehicle-selector-wrapper">
+    <div class="vehicle-selector">
+      <select id="vehicleSelect">
+        <option>Toyota Hilux RXTT22</option>
+        <option>Hyundai Tucson ABCD11</option>
+        <option>Chevrolet D-Max XYZT88</option>
+      </select>
+    </div>
+  </section>
 
-    <header class="app-header">
+  <!-- SWIPE PAGES -->
+  <div id="dashboardCarousel" class="dashboard-carousel">
+    <!-- PAGE 1 -->
+    <section class="dashboard-page">
+      <h2 class="section-title">Vehicle Information</h2>
 
-        <div class="page-title">
-            Dashboard
+      <div class="vehicle-image-strip">
+        <img src="./images/vehicle1.jpg" alt="Vehicle 1" />
+        <img src="./images/vehicle2.jpg" alt="Vehicle 2" />
+        <img src="./images/vehicle3.jpg" alt="Vehicle 3" />
+      </div>
+
+      <div class="info-cards">
+        <div class="glass-card">
+          <div class="card-title">Brand</div>
+          <div class="card-description">Toyota</div>
         </div>
 
-        ./images/Bean.jpg
-
-    </header>
-
-    <!-- VEHICLE SELECTOR -->
-
-    <section class="vehicle-selector-wrapper">
-
-        <div class="vehicle-selector">
-
-            <select id="vehicleSelect">
-
-                <option>
-                    Toyota Hilux RXTT22
-                </option>
-
-                <option>
-                    Hyundai Tucson ABCD11
-                </option>
-
-                <option>
-                    Chevrolet D-Max XYZT88
-                </option>
-
-            </select>
-
+        <div class="glass-card">
+          <div class="card-title">Model</div>
+          <div class="card-description">Hilux SRX</div>
         </div>
 
+        <div class="glass-card">
+          <div class="card-title">Year</div>
+          <div class="card-description">2023</div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-title">Plate</div>
+          <div class="card-description">RXTT22</div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-title">Color</div>
+          <div class="card-description">White</div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-title">VIN</div>
+          <div class="card-description">JT123456789</div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-title">Mileage</div>
+          <div class="card-description">58.425 Km</div>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-title">City</div>
+          <div class="card-description">Santiago</div>
+        </div>
+      </div>
     </section>
 
-    <!-- SWIPE PAGES -->
-
-    <div
-        id="dashboardCarousel"
-        class="dashboard-carousel">
-
-        <!-- PAGE 1 -->
-
-        <section class="dashboard-page">
-
-            <h2 class="section-title">
-                Vehicle Information
-            </h2>
-
-            <div class="vehicle-image-strip">
-
-                ./images/vehicle1.jpg
-
-                ./images/vehicle2.jpg
-
-                ./images/vehicle3.jpg
-
-            </div>
-
-            <div class="info-cards">
-
-                <div class="glass-card">
-                    <div class="card-title">Brand</div>
-                    <div class="card-description">Toyota</div>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-title">Model</div>
-                    <div class="card-description">Hilux SRX</div>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-title">Year</div>
-                    <div class="card-description">2023</div>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-title">Plate</div>
-                    <div class="card-description">RXTT22</div>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-title">Color</div>
-                    <div class="card-description">White</div>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-title">VIN</div>
-                    <div class="card-description">JT123456789</div>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-title">Mileage</div>
-                    <div class="card-description">58.425 Km</div>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-title">City</div>
-                    <div class="card-description">Santiago</div>
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- PAGE 2 -->
-
-        <section class="dashboard-page">
-
-            <h2 class="section-title">
-                Vehicle Documentation
-            </h2>
-
-            <div class="documents-list">
-
-                <div class="glass-card doc-card">
-                    <div class="card-title">Padrón</div>
-                    <div class="card-description">Updated: 01/01/2026</div>
-                    <div class="card-description">Permanent</div>
-                </div>
-
-                <div class="glass-card doc-card">
-                    <div class="card-title">Permiso Circulación</div>
-                    <div class="card-description">Updated: 01/04/2026</div>
-                    <div class="card-description">Expires: 31/03/2027</div>
-                </div>
-
-                <div class="glass-card doc-card">
-                    <div class="card-title">Revisión Técnica</div>
-                    <div class="card-description">Updated: 01/08/2026</div>
-                    <div class="card-description">Expires: 01/08/2027</div>
-                </div>
-
-                <div class="glass-card doc-card">
-                    <div class="card-title">Revisión Gases</div>
-                    <div class="card-description">Updated: 01/08/2026</div>
-                    <div class="card-description">Expires: 01/08/2027</div>
-                </div>
-
-                <div class="glass-card doc-card">
-                    <div class="card-title">SOAP</div>
-                    <div class="card-description">Updated: 01/04/2026</div>
-                    <div class="card-description">Expires: 31/03/2027</div>
-                </div>
-
-                <div class="glass-card doc-card">
-                    <div class="card-title">Seguro Vehículo</div>
-                    <div class="card-description">Updated: 01/09/2026</div>
-                    <div class="card-description">Expires: 01/09/2027</div>
-                </div>
-
-                <div class="glass-card doc-card">
-                    <div class="card-title">Extintor</div>
-                    <div class="card-description">Updated: 20/03/2026</div>
-                    <div class="card-description">Expires: 20/03/2027</div>
-                </div>
-
-                <div class="glass-card doc-card">
-                    <div class="card-title">Cambio de Aceite</div>
-                    <div class="card-description">10/09/2026</div>
-                    <div class="card-description">Next: 70.000 Km</div>
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- PAGE 3 -->
-
-        <section class="dashboard-page">
-
-            <h2 class="section-title">
-                Maintenance History
-            </h2>
-
-            <div class="maintenance-list">
-
-                <div class="glass-card maintenance-card">
-
-                    <div class="card-title">
-                        10/08/2026
-                    </div>
-
-                    <div class="card-description">
-                        60.000 Km Service
-                    </div>
-
-                    <div class="card-description">
-                        $420.000
-                    </div>
-
-                    <div class="card-description">
-                        Oil + Filters + Inspection
-                    </div>
-
-                </div>
-
-                <div class="glass-card maintenance-card">
-
-                    <div class="card-title">
-                        15/03/2026
-                    </div>
-
-                    <div class="card-description">
-                        Brake Replacement
-                    </div>
-
-                    <div class="card-description">
-                        $180.000
-                    </div>
-
-                    <div class="card-description">
-                        Front Brakes
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </div>
-
-    <!-- DOTS -->
-
-    <div class="carousel-dots">
-
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-
-    </div>
-
-    <!-- BOTTOM NAV -->
-
-    <nav class="bottom-nav">
-
-        <a href="dashboard.html" class="nav-item active">
-            <span class="nav-label">Home</span>
-        </a>
-
-        vehicles.html
-            <span class="nav-label">Vehicles</span>
-        </a>
-
-        documents.html
-            <span class="nav-label">Documents</span>
-        </a>
-
-        alerts.html
-            <span class="nav-label">Alerts</span>
-        </a>
-
-        settings.html
-            <span class="nav-label">Settings</span>
-        </a>
-
-    </nav>
-
-    <script>
-
-        const carousel =
-            document.getElementById("dashboardCarousel");
-
-        const dots =
-            document.querySelectorAll(".dot");
-
-        carousel.addEventListener("scroll", () => {
-
-            const page =
-                Math.round(
-                    carousel.scrollLeft /
-                    carousel.clientWidth
-                );
-
-            dots.forEach(dot =>
-                dot.classList.remove("active")
-            );
-
-            if (dots[page]) {
-                dots[page].classList.add("active");
-            }
-
-        });
-
-    </script>
-
+    <!-- PAGE 2 -->
+    <section class="dashboard-page">
+      <h2 class="section-title">Vehicle Documentation</h2>
+
+      <div class="documents-list">
+        <div class="glass-card doc-card">
+          <div class="card-title">Padrón</div>
+          <div class="card-description">Updated: 01/01/2026</div>
+          <div class="card-description">Permanent</div>
+        </div>
+
+        <div class="glass-card doc-card">
+          <div class="card-title">Permiso Circulación</div>
+          <div class="card-description">Updated: 01/04/2026</div>
+          <div class="card-description">Expires: 31/03/2027</div>
+        </div>
+
+        <div class="glass-card doc-card">
+          <div class="card-title">Revisión Técnica</div>
+          <div class="card-description">Updated: 01/08/2026</div>
+          <div class="card-description">Expires: 01/08/2027</div>
+        </div>
+
+        <div class="glass-card doc-card">
+          <div class="card-title">Revisión Gases</div>
+          <div class="card-description">Updated: 01/08/2026</div>
+          <div class="card-description">Expires: 01/08/2027</div>
+        </div>
+
+        <div class="glass-card doc-card">
+          <div class="card-title">SOAP</div>
+          <div class="card-description">Updated: 01/04/2026</div>
+          <div class="card-description">Expires: 31/03/2027</div>
+        </div>
+
+        <div class="glass-card doc-card">
+          <div class="card-title">Seguro Vehículo</div>
+          <div class="card-description">Updated: 01/09/2026</div>
+          <div class="card-description">Expires: 01/09/2027</div>
+        </div>
+
+        <div class="glass-card doc-card">
+          <div class="card-title">Extintor</div>
+          <div class="card-description">Updated: 20/03/2026</div>
+          <div class="card-description">Expires: 20/03/2027</div>
+        </div>
+
+        <div class="glass-card doc-card">
+          <div class="card-title">Cambio de Aceite</div>
+          <div class="card-description">10/09/2026</div>
+          <div class="card-description">Next: 70.000 Km</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 3 -->
+    <section class="dashboard-page">
+      <h2 class="section-title">Maintenance History</h2>
+
+      <div class="maintenance-list">
+        <div class="glass-card maintenance-card">
+          <div class="card-title">10/08/2026</div>
+          <div class="card-description">60.000 Km Service</div>
+          <div class="card-description">$420.000</div>
+          <div class="card-description">Oil + Filters + Inspection</div>
+        </div>
+
+        <div class="glass-card maintenance-card">
+          <div class="card-title">15/03/2026</div>
+          <div class="card-description">Brake Replacement</div>
+          <div class="card-description">$180.000</div>
+          <div class="card-description">Front Brakes</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- DOTS -->
+  <div class="carousel-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item active">
+      <span class="nav-label">Home</span>
+    </a>
+
+    <a href="vehicles.html" class="nav-item">
+      <span class="nav-label">Vehicles</span>
+    </a>
+
+    <a href="documents.html" class="nav-item">
+      <span class="nav-label">Documents</span>
+    </a>
+
+    <a href="alerts.html" class="nav-item">
+      <span class="nav-label">Alerts</span>
+    </a>
+
+    <a href="settings.html" class="nav-item">
+      <span class="nav-label">Settings</span>
+    </a>
+  </nav>
+
+  <script>
+    const carousel = document.getElementById("dashboardCarousel");
+    const dots = document.querySelectorAll(".dot");
+
+    carousel.addEventListener("scroll", () => {
+      const page = Math.round(carousel.scrollLeft / carousel.clientWidth);
+      dots.forEach((dot) => dot.classList.remove("active"));
+      if (dots[page]) dots[page].classList.add("active");
+    });
+  </script>
 </body>
-
 </html>
