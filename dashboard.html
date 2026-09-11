@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
@@ -12,269 +9,112 @@
     <title>FleetDocs - Dashboard</title>
 
     <!-- PWA -->
-
     <meta name="theme-color" content="#050816">
-
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes">
-
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="black-translucent">
-
-    <meta
-        name="apple-mobile-web-app-title"
-        content="FleetDocs">
-
-     <link rel="manifest" href="./manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FleetDocs">
+    <link rel="manifest" href="./manifest.json">
 
     <!-- Styles -->
-    
     <link rel="stylesheet" href="./css/main.css?v=3">
-
 </head>
 
 <body>
-
     <!-- HEADER -->
-
     <header class="topbar">
-
-        <button
-            class="menu-button"
-            aria-label="Menu">
-
+        <button class="menu-button" aria-label="Menu" type="button">
             ☰
-
         </button>
 
-        <div class="avatar-container">
+        <img
+            src="./images/avatar.png"
+            alt="User"
+            class="avatar">
+    </header>
 
-            <img
-                src="./images/avatar.png"
-                alt="User"
-                class="ero">
+    <main class="dashboard-content hero">
+        <!-- VEHICLE SELECTOR -->
+        <div class="vehicle-selector">
+            <select id="vehicleSelect" aria-label="Select vehicle">
+                <option value="1">Toyota Hilux RXTT22</option>
+                <option value="2">Hyundai Tucson ABCD11</option>
+                <option value="3">Chevrolet D-Max XYZT88</option>
+            </select>
+        </div>
 
-        <section class="dashboard-content">
-
-            <!-- VEHICLE SELECTOR -->
-
-            <div class="vehicle-selector">
-
-                <select id="vehicleSelect">
-
-                    <option value="1">
-                        Toyota Hilux RXTT22
-                    </option>
-
-                    <option value="2">
-                        Hyundai Tucson ABCD11
-                    </option>
-
-                    <option value="3">
-                        Chevrolet D-Max XYZT88
-                    </option>
-
-                </select>
-
+        <!-- DOCUMENTS -->
+        <section class="dashboard-grid" aria-label="Documents">
+            <div class="glass-card">
+                <div class="icon-wrapper">📄</div>
+                <div class="card-title">Technical Review</div>
+                <div class="card-description">Valid until 10-Nov-2026</div>
             </div>
 
-            <!-- DOCUMENTS -->
-
-            <div class="dashboard-grid">
-
-                <div class="glass-card">
-
-                    <div class="icon-wrapper">
-
-                        📄
-
-                    </div>
-
-                    <div class="card-title">
-                        Technical Review
-                    </div>
-
-                    <div class="card-description">
-                        Valid until 10-Nov-2026
-                    </div>
-
-                </div>
-
-                <div class="glass-card">
-
-                    <div class="icon-wrapper">
-
-                        🚗
-
-                    </div>
-
-                    <div class="card-title">
-                        Vehicle Permit
-                    </div>
-
-                    <div class="card-description">
-                        Expires in 24 days
-                    </div>
-
-                </div>
-
-                <div class="glass-card">
-
-                    <div class="icon-wrapper">
-
-                        🛡️
-
-                    </div>
-
-                    <div class="card-title">
-                        SOAP
-                    </div>
-
-                    <div class="card-description">
-                        Active
-                    </div>
-
-                </div>
-
-                <div class="glass-card">
-
-                    <div class="icon-wrapper">
-
-                        📋
-
-                    </div>
-
-                    <div class="card-title">
-                        Insurance
-                    </div>
-
-                    <div class="card-description">
-                        Active
-                    </div>
-
-                </div>
-
-                <div class="glass-card">
-
-                    <div class="icon-wrapper">
-
-                        🪪
-
-                    </div>
-
-                    <div class="card-title">
-                        Driver License
-                    </div>
-
-                    <div class="card-description">
-                        Valid
-                    </div>
-
-                </div>
-
-                <div class="glass-card">
-
-                    <div class="icon-wrapper">
-
-                        🚒
-
-                    </div>
-
-                    <div class="card-title">
-                        Extinguisher
-                    </div>
-
-                    <div class="card-description">
-                        Expires in 5 days
-                    </div>
-
-                </div>
-
+            <div class="glass-card">
+                <div class="icon-wrapper">🚗</div>
+                <div class="card-title">Vehicle Permit</div>
+                <div class="card-description">Expires in 24 days</div>
             </div>
 
+            <div class="glass-card">
+                <div class="icon-wrapper">🛡️</div>
+                <div class="card-title">SOAP</div>
+                <div class="card-description">Active</div>
+            </div>
+
+            <div class="glass-card">
+                <div class="icon-wrapper">📋</div>
+                <div class="card-title">Insurance</div>
+                <div class="card-description">Active</div>
+            </div>
+
+            <div class="glass-card">
+                <div class="icon-wrapper">🪪</div>
+                <div class="card-title">Driver License</div>
+                <div class="card-description">Valid</div>
+            </div>
+
+            <div class="glass-card">
+                <div class="icon-wrapper">🚒</div>
+                <div class="card-title">Extinguisher</div>
+                <div class="card-description">Expires in 5 days</div>
+            </div>
         </section>
-
     </main>
 
     <!-- BOTTOM NAVIGATION -->
-
-    <nav class="bottom-nav">
-
-        ./dashboard.html
-
-            <span class="nav-icon">
-                🏠
-            </span>
-
-            <span class="nav-label">
-                Home
-            </span>
-
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+        <a href="./dashboard.html" class="nav-item active" aria-current="page">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
         </a>
 
-        ./vehicles.html
-
-            <span class="nav-icon">
-                🚗
-            </span>
-
-            <span class="nav-label">
-                Vehicles
-            </span>
-
+        <a href="./vehicles.html" class="nav-item">
+            <span class="nav-icon">🚗</span>
+            <span class="nav-label">Vehicles</span>
         </a>
 
-        ./documents.html
-
-            <span class="nav-icon">
-                📄
-            </span>
-
-            <span class="nav-label">
-                Documents
-            </span>
-
+        <a href="./documents.html" class="nav-item">
+            <span class="nav-icon">📄</span>
+            <span class="nav-label">Documents</span>
         </a>
 
-        ./alerts.html
-
-            <span class="nav-icon">
-                🔔
-            </span>
-
-            <span class="nav-label">
-                Alerts
-            </span>
-
+        <a href="./alerts.html" class="nav-item">
+            <span class="nav-icon">🔔</span>
+            <span class="nav-label">Alerts</span>
         </a>
 
-        ./settings.html
-
-            <span class="nav-icon">
-                ⚙️
-            </span>
-
-            <span class="nav-label">
-                Settings
-            </span>
-
+        <a href="./settings.html" class="nav-item">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Settings</span>
         </a>
-
     </nav>
 
     <script>
-
         const savedLanguage =
-            localStorage.getItem("fleetdocs-language")
-            || "en";
+            localStorage.getItem("fleetdocs-language") || "en";
 
-        document.documentElement.lang =
-            savedLanguage;
-
+        document.documentElement.lang = savedLanguage;
     </script>
-
 </body>
-
 </html>
