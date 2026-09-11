@@ -109,11 +109,11 @@ body {
 }
 
 .subtitle-container {
-  min-height: 5.5em;
+  height: 6.2em;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .logo-wrapper {
