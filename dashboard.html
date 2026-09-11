@@ -7,432 +7,273 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 
-    <title>FleetDocs Dashboard</title>
+    <title>FleetDocs - Dashboard</title>
 
-    ./css/style.css
-    ./css/main.css
+    <!-- PWA -->
 
-    <style>
+    <meta name="theme-color" content="#050816">
 
-        body{
-            font-family:"Segoe UI",sans-serif;
-            color:white;
-            padding-bottom:90px;
-        }
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes">
 
-        .dashboard{
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent">
 
-            min-height:100vh;
+    <meta
+        name="apple-mobile-web-app-title"
+        content="FleetDocs">
 
-            padding:20px 16px;
-        }
+    ./manifest.json
 
-        .header{
+    <!-- Styles -->
 
-            display:flex;
-
-            justify-content:space-between;
-
-            align-items:center;
-
-            margin-bottom:20px;
-        }
-
-        .title{
-
-            font-size:24px;
-
-            font-weight:600;
-
-            color:var(--color-title);
-        }
-
-        .avatar{
-
-            width:48px;
-            height:48px;
-
-            border-radius:50%;
-
-            background:
-                rgba(255,255,255,.08);
-
-            border:
-                1px solid
-                var(--color-panel-border);
-        }
-
-        .vehicle-selector{
-
-            margin-bottom:20px;
-        }
-
-        .vehicle-selector select{
-
-            width:100%;
-
-            height:50px;
-
-            border-radius:16px;
-
-            border:1px solid
-            var(--color-panel-border);
-
-            background:var(--color-panel);
-
-            color:white;
-
-            padding:0 16px;
-
-            font-size:15px;
-        }
-
-        .stats{
-
-            display:grid;
-
-            grid-template-columns:
-            repeat(3,1fr);
-
-            gap:12px;
-
-            margin-bottom:24px;
-        }
-
-        .stat-card{
-
-            background:var(--color-panel);
-
-            border:1px solid
-            var(--color-panel-border);
-
-            border-radius:18px;
-
-            padding:14px;
-
-            text-align:center;
-
-            backdrop-filter:blur(12px);
-        }
-
-        .stat-number{
-
-            font-size:24px;
-
-            font-weight:700;
-
-            margin-bottom:6px;
-        }
-
-        .stat-label{
-
-            font-size:11px;
-
-            color:var(--color-text);
-        }
-
-        .documents-grid{
-
-            display:grid;
-
-            grid-template-columns:
-            repeat(2,1fr);
-
-            gap:14px;
-        }
-
-        .document-card{
-
-            background:var(--color-panel);
-
-            border:1px solid
-            var(--color-panel-border);
-
-            border-radius:20px;
-
-            padding:18px;
-
-            backdrop-filter:blur(12px);
-
-            min-height:140px;
-
-            display:flex;
-
-            flex-direction:column;
-
-            justify-content:space-between;
-        }
-
-        .document-title{
-
-            font-size:14px;
-
-            font-weight:600;
-
-            color:var(--color-title);
-        }
-
-        .document-status{
-
-            font-size:12px;
-        }
-
-        .green{
-            color:#22c55e;
-        }
-
-        .yellow{
-            color:#facc15;
-        }
-
-        .red{
-            color:#ef4444;
-        }
-
-        .bottom-nav{
-
-            position:fixed;
-
-            left:0;
-            right:0;
-            bottom:0;
-
-            height:70px;
-
-            background:
-            rgba(15,23,42,.95);
-
-            backdrop-filter:blur(12px);
-
-            display:flex;
-
-            justify-content:space-around;
-
-            align-items:center;
-
-            border-top:
-            1px solid
-            rgba(255,255,255,.08);
-        }
-
-        .nav-item{
-
-            text-decoration:none;
-
-            color:var(--color-text);
-
-            font-size:12px;
-
-            display:flex;
-
-            flex-direction:column;
-
-            align-items:center;
-
-            gap:4px;
-        }
-
-        .nav-item.active{
-
-            color:var(--color-accent);
-        }
-
-        .nav-icon{
-
-            font-size:20px;
-        }
-
-    </style>
+    ./css/main.css?v=3
 
 </head>
 
 <body>
 
-    <div class="dashboard">
+    <!-- HEADER -->
 
-        <div class="header">
+    <header class="topbar">
 
-            <div class="title">
-                FleetDocs
-            </div>
+        <button
+            class="menu-button"
+            aria-label="Menu">
 
-            <div class="avatar"></div>
+            ☰
 
-        </div>
+        </button>
 
-        <div class="vehicle-selector">
+        <div class="avatar-container">
 
-            <select>
+            <img
+                src="./images/avatar.png"
+                alt="User"
+                class="ero">
 
-                <option>
-                    Toyota Hilux RXTT22
-                </option>
+        <section class="dashboard-content">
 
-                <option>
-                    Hyundai Tucson
-                </option>
+            <!-- VEHICLE SELECTOR -->
 
-                <option>
-                    Chevrolet D-Max
-                </option>
+            <div class="vehicle-selector">
 
-            </select>
+                <select id="vehicleSelect">
 
-        </div>
+                    <option value="1">
+                        Toyota Hilux RXTT22
+                    </option>
 
-        <div class="stats">
+                    <option value="2">
+                        Hyundai Tucson ABCD11
+                    </option>
 
-            <div class="stat-card">
+                    <option value="3">
+                        Chevrolet D-Max XYZT88
+                    </option>
 
-                <div class="stat-number red">
-                    2
-                </div>
-
-                <div class="stat-label">
-                    Alerts
-                </div>
+                </select>
 
             </div>
 
-            <div class="stat-card">
+            <!-- DOCUMENTS -->
 
-                <div class="stat-number yellow">
-                    5
+            <div class="dashboard-grid">
+
+                <div class="glass-card">
+
+                    <div class="icon-wrapper">
+
+                        📄
+
+                    </div>
+
+                    <div class="card-title">
+                        Technical Review
+                    </div>
+
+                    <div class="card-description">
+                        Valid until 10-Nov-2026
+                    </div>
+
                 </div>
 
-                <div class="stat-label">
-                    Expiring
+                <div class="glass-card">
+
+                    <div class="icon-wrapper">
+
+                        🚗
+
+                    </div>
+
+                    <div class="card-title">
+                        Vehicle Permit
+                    </div>
+
+                    <div class="card-description">
+                        Expires in 24 days
+                    </div>
+
+                </div>
+
+                <div class="glass-card">
+
+                    <div class="icon-wrapper">
+
+                        🛡️
+
+                    </div>
+
+                    <div class="card-title">
+                        SOAP
+                    </div>
+
+                    <div class="card-description">
+                        Active
+                    </div>
+
+                </div>
+
+                <div class="glass-card">
+
+                    <div class="icon-wrapper">
+
+                        📋
+
+                    </div>
+
+                    <div class="card-title">
+                        Insurance
+                    </div>
+
+                    <div class="card-description">
+                        Active
+                    </div>
+
+                </div>
+
+                <div class="glass-card">
+
+                    <div class="icon-wrapper">
+
+                        🪪
+
+                    </div>
+
+                    <div class="card-title">
+                        Driver License
+                    </div>
+
+                    <div class="card-description">
+                        Valid
+                    </div>
+
+                </div>
+
+                <div class="glass-card">
+
+                    <div class="icon-wrapper">
+
+                        🚒
+
+                    </div>
+
+                    <div class="card-title">
+                        Extinguisher
+                    </div>
+
+                    <div class="card-description">
+                        Expires in 5 days
+                    </div>
+
                 </div>
 
             </div>
 
-            <div class="stat-card">
+        </section>
 
-                <div class="stat-number green">
-                    12
-                </div>
+    </main>
 
-                <div class="stat-label">
-                    Active
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="documents-grid">
-
-            <div class="document-card">
-
-                <div class="document-title">
-                    Technical Review
-                </div>
-
-                <div class="document-status green">
-                    Valid
-                </div>
-
-            </div>
-
-            <div class="document-card">
-
-                <div class="document-title">
-                    Vehicle Permit
-                </div>
-
-                <div class="document-status yellow">
-                    24 Days Left
-                </div>
-
-            </div>
-
-            <div class="document-card">
-
-                <div class="document-title">
-                    SOAP
-                </div>
-
-                <div class="document-status green">
-                    Active
-                </div>
-
-            </div>
-
-            <div class="document-card">
-
-                <div class="document-title">
-                    Insurance
-                </div>
-
-                <div class="document-status green">
-                    Active
-                </div>
-
-            </div>
-
-            <div class="document-card">
-
-                <div class="document-title">
-                    Driver License
-                </div>
-
-                <div class="document-status green">
-                    Valid
-                </div>
-
-            </div>
-
-            <div class="document-card">
-
-                <div class="document-title">
-                    Extinguisher
-                </div>
-
-                <div class="document-status red">
-                    Expired
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+    <!-- BOTTOM NAVIGATION -->
 
     <nav class="bottom-nav">
 
-        <a
-            href="dashboard.html"
-            class="nav-item active">
+        ./dashboard.html
 
-            <span class="nav-icon">🏠</span>
-            <span>Home</span>
+            <span class="nav-icon">
+                🏠
+            </span>
 
-        </a>
-
-        documents.html
-
-            <span class="nav-icon">📄</span>
-            <span>Docs</span>
+            <span class="nav-label">
+                Home
+            </span>
 
         </a>
 
-        alerts.html
+        ./vehicles.html
 
-            <span class="nav-icon">🔔</span>
-            <span>Alerts</span>
+            <span class="nav-icon">
+                🚗
+            </span>
+
+            <span class="nav-label">
+                Vehicles
+            </span>
 
         </a>
 
-        settings.html
+        ./documents.html
 
-            <span class="nav-icon">⚙️</span>
-            <span>Settings</span>
+            <span class="nav-icon">
+                📄
+            </span>
+
+            <span class="nav-label">
+                Documents
+            </span>
+
+        </a>
+
+        ./alerts.html
+
+            <span class="nav-icon">
+                🔔
+            </span>
+
+            <span class="nav-label">
+                Alerts
+            </span>
+
+        </a>
+
+        ./settings.html
+
+            <span class="nav-icon">
+                ⚙️
+            </span>
+
+            <span class="nav-label">
+                Settings
+            </span>
 
         </a>
 
     </nav>
+
+    <script>
+
+        const savedLanguage =
+            localStorage.getItem("fleetdocs-language")
+            || "en";
+
+        document.documentElement.lang =
+            savedLanguage;
+
+    </script>
 
 </body>
 
