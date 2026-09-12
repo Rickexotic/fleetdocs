@@ -980,26 +980,33 @@ main.hero {
   text-align:left;
 }
 
-/* Dashboard page: show 6 cards, scroll the rest */
-#dashboardCarousel .dashboard-page .info-cards {
-  max-height: 456px;          /* ~6 cards visible (adjust 440–480 if needed) */
+/* Dashboard page: consistent scroll containers (about 6 cards visible) */
+#dashboardCarousel .dashboard-page .info-cards,
+#dashboardCarousel .dashboard-page .documents-list,
+#dashboardCarousel .dashboard-page .maintenance-list {
+  max-height: 456px;          /* tweak 440–480 if needed */
   overflow-y: auto;
-  padding-right: 4px;         /* space for scrollbar */
+  padding-right: 4px;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
 }
 
-/* Keep cards compact */
-#dashboardCarousel .dashboard-page .info-cards .glass-card {
+/* Keep all cards compact */
+#dashboardCarousel .dashboard-page .glass-card {
   min-height: 64px;
   padding: 10px 12px;
 }
 
-/* Optional: slim scrollbar */
-#dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar {
+/* Optional: slim scrollbar for all three lists */
+#dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar,
+#dashboardCarousel .dashboard-page .documents-list::-webkit-scrollbar,
+#dashboardCarousel .dashboard-page .maintenance-list::-webkit-scrollbar {
   width: 6px;
 }
-#dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar-thumb {
+
+#dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar-thumb,
+#dashboardCarousel .dashboard-page .documents-list::-webkit-scrollbar-thumb,
+#dashboardCarousel .dashboard-page .maintenance-list::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 999px;
 }
