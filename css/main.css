@@ -979,3 +979,27 @@ main.hero {
   align-items:flex-start;
   text-align:left;
 }
+
+/* Dashboard page: show 6 cards, scroll the rest */
+#dashboardCarousel .dashboard-page .info-cards {
+  max-height: 456px;          /* ~6 cards visible (adjust 440–480 if needed) */
+  overflow-y: auto;
+  padding-right: 4px;         /* space for scrollbar */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Keep cards compact */
+#dashboardCarousel .dashboard-page .info-cards .glass-card {
+  min-height: 64px;
+  padding: 10px 12px;
+}
+
+/* Optional: slim scrollbar */
+#dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar {
+  width: 6px;
+}
+#dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+}
