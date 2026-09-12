@@ -1010,33 +1010,68 @@ main.hero {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 999px;
 }
-
-/* Mobile fix: keep room for dots + bottom nav */
+/* =========================
+   MOBILE LAYOUT RESET/FIX
+   Replace prior mobile tweaks with this single block
+   ========================= */
 @media (max-width: 768px) {
+  /* Reserve space for fixed bottom nav so content/dots are never hidden */
+  body {
+    padding-bottom: calc(86px + env(safe-area-inset-bottom));
+  }
+
+  /* Keep carousel simple */
   #dashboardCarousel {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     padding-bottom: 0;
   }
 
+  /* Scrollable card containers with safe mobile height */
   #dashboardCarousel .dashboard-page .info-cards,
   #dashboardCarousel .dashboard-page .documents-list,
   #dashboardCarousel .dashboard-page .maintenance-list {
-    max-height: calc(100dvh - 360px); /* reserves space for header/select/title/dots/nav */
-    min-height: 260px;                /* prevents too small list area */
+    max-height: calc(100dvh - 440px);
+    min-height: 170px;
     overflow-y: auto;
+    padding-right: 4px;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 
+  /* Compact cards */
+  #dashboardCarousel .dashboard-page .glass-card {
+    min-height: 60px;
+    padding: 10px 12px;
+  }
+
+  /* Dots must be in normal flow (not sticky/fixed) */
   .carousel-dots {
-    position: sticky;
-    bottom: calc(70px + env(safe-area-inset-bottom)); /* sit above bottom nav */
-    z-index: 5;
-    margin: 6px 0 8px;
+    position: static !important;
+    margin: 10px 0 12px;
+    z-index: auto;
   }
 
+  /* Fixed bottom nav */
   .bottom-nav {
-    position: sticky;
+    position: fixed;
+    left: 0;
+    right: 0;
     bottom: 0;
-    z-index: 10;
+    z-index: 1000;
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Optional slimmer scrollbars */
+  #dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar,
+  #dashboardCarousel .dashboard-page .documents-list::-webkit-scrollbar,
+  #dashboardCarousel .dashboard-page .maintenance-list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar-thumb,
+  #dashboardCarousel .dashboard-page .documents-list::-webkit-scrollbar-thumb,
+  #dashboardCarousel .dashboard-page .maintenance-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
   }
 }
