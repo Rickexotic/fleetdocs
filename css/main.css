@@ -1010,3 +1010,33 @@ main.hero {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 999px;
 }
+
+/* Mobile fix: keep room for dots + bottom nav */
+@media (max-width: 768px) {
+  #dashboardCarousel {
+    margin-bottom: 4px;
+    padding-bottom: 0;
+  }
+
+  #dashboardCarousel .dashboard-page .info-cards,
+  #dashboardCarousel .dashboard-page .documents-list,
+  #dashboardCarousel .dashboard-page .maintenance-list {
+    max-height: calc(100dvh - 360px); /* reserves space for header/select/title/dots/nav */
+    min-height: 260px;                /* prevents too small list area */
+    overflow-y: auto;
+  }
+
+  .carousel-dots {
+    position: sticky;
+    bottom: calc(70px + env(safe-area-inset-bottom)); /* sit above bottom nav */
+    z-index: 5;
+    margin: 6px 0 8px;
+  }
+
+  .bottom-nav {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
