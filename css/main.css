@@ -32,6 +32,7 @@
   --card-height: 118px;
   --card-gap: 16px;
   --icon-size: 24px;
+  --bottom-nav-height: 72px;
 }
 
 body.light-mode {
@@ -221,7 +222,7 @@ body {
   display: flex;
   flex-direction: column;
   padding-top: 0;
-  padding-bottom: 80px;
+  padding-bottom: var(--bottom-nav-height);
   padding-left: 12px;
   padding-right: 12px;
 }
@@ -724,11 +725,11 @@ main.hero {
 
 .bottom-nav {
   position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 12px);
-  max-width: 520px;
+  bottom: 6px;
+  left: 12px;
+  right: 12px;
+  width: auto;
+  max-width: none;
   height: 60px;
   display: flex;
   justify-content: space-around;
@@ -738,8 +739,8 @@ main.hero {
   border-radius: 14px;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
-  z-index: 999;
-  margin-bottom: 6px;
+  z-index: 1000;
+  margin-bottom: 0;
 }
 
 .nav-item {
@@ -984,7 +985,7 @@ main.hero {
 #dashboardCarousel .dashboard-page .info-cards,
 #dashboardCarousel .dashboard-page .documents-list,
 #dashboardCarousel .dashboard-page .maintenance-list {
-  max-height: 456px;          /* tweak 440–480 if needed */
+  max-height: 456px;
   overflow-y: auto;
   padding-right: 4px;
   -webkit-overflow-scrolling: touch;
@@ -995,120 +996,4 @@ main.hero {
 #dashboardCarousel .dashboard-page .glass-card {
   min-height: 64px;
   padding: 10px 12px;
-}
-
-/* Optional: slim scrollbar for all three lists */
-#dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar,
-#dashboardCarousel .dashboard-page .documents-list::-webkit-scrollbar,
-#dashboardCarousel .dashboard-page .maintenance-list::-webkit-scrollbar {
-  width: 6px;
-}
-
-#dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar-thumb,
-#dashboardCarousel .dashboard-page .documents-list::-webkit-scrollbar-thumb,
-#dashboardCarousel .dashboard-page .maintenance-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 999px;
-}
-/* =========================
-   MOBILE LAYOUT RESET/FIX
-   Replace prior mobile tweaks with this single block
-   ========================= */
-@media (max-width: 768px) {
-  /* Reserve space for fixed bottom nav so content/dots are never hidden */
-  body {
-    padding-bottom: calc(86px + env(safe-area-inset-bottom));
-  }
-
-  /* Keep carousel simple */
-  #dashboardCarousel {
-    margin-bottom: 8px;
-    padding-bottom: 0;
-  }
-
-  /* Scrollable card containers with safe mobile height */
-  #dashboardCarousel .dashboard-page .info-cards,
-  #dashboardCarousel .dashboard-page .documents-list,
-  #dashboardCarousel .dashboard-page .maintenance-list {
-    max-height: calc(100dvh - 440px);
-    min-height: 170px;
-    overflow-y: auto;
-    padding-right: 4px;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-  }
-
-  /* Compact cards */
-  #dashboardCarousel .dashboard-page .glass-card {
-    min-height: 60px;
-    padding: 10px 12px;
-  }
-
-  /* Dots must be in normal flow (not sticky/fixed) */
-  .carousel-dots {
-    position: static !important;
-    margin: 10px 0 12px;
-    z-index: auto;
-  }
-
-  /* Fixed bottom nav */
-  .bottom-nav {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* Optional slimmer scrollbars */
-  #dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar,
-  #dashboardCarousel .dashboard-page .documents-list::-webkit-scrollbar,
-  #dashboardCarousel .dashboard-page .maintenance-list::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  #dashboardCarousel .dashboard-page .info-cards::-webkit-scrollbar-thumb,
-  #dashboardCarousel .dashboard-page .documents-list::-webkit-scrollbar-thumb,
-  #dashboardCarousel .dashboard-page .maintenance-list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 999px;
-  }
-}
-@media (max-width: 768px) {
-  /* Fixed bottom nav */
-  .bottom-nav {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* Reserve visible area so content never sits under nav */
-  body {
-    padding-bottom: calc(96px + env(safe-area-inset-bottom));
-  }
-
-  /* Scrollable containers: leave explicit room for dots */
-  #dashboardCarousel .dashboard-page .info-cards,
-  #dashboardCarousel .dashboard-page .documents-list,
-  #dashboardCarousel .dashboard-page .maintenance-list {
-    max-height: calc(100dvh - 470px);
-    min-height: 170px;
-    overflow-y: auto;
-    padding-right: 4px;
-    margin-bottom: 10px; /* gap before dots */
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-  }
-
-  /* Dots directly below the container, always visible */
-  .carousel-dots {
-    position: relative !important;
-    bottom: auto !important;
-    margin: 0 0 calc(14px + env(safe-area-inset-bottom));
-    z-index: 2;
-  }
 }
