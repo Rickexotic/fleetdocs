@@ -23,26 +23,31 @@
     body {
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      min-height: 100vh;
+      height: 100dvh;
       overflow: hidden;
     }
 
     .app-header {
-      flex-shrink: 0;
+      flex: 0 0 auto;
     }
 
     .vehicle-selector-wrapper {
-      flex-shrink: 0;
+      flex: 0 0 auto;
+      padding-bottom: 12px;
     }
 
     /* Carousel container: fill remaining space */
     .dashboard-carousel {
       display: flex;
-      flex: 1;
+      flex: 1 1 auto;
+      min-height: 0;
       overflow-x: auto;
       overflow-y: hidden;
       scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
       gap: 0;
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -54,14 +59,16 @@
     }
 
     .dashboard-page {
+      flex: 0 0 100%;
       min-width: 100%;
       scroll-snap-align: start;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
+      min-height: 0;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      padding: 12px 16px;
+      padding: 12px 16px calc(var(--bottom-nav-height) + 56px + env(safe-area-inset-bottom));
     }
 
     /* Header image (Bean.jpg) */
@@ -80,7 +87,9 @@
       gap: 8px;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
-      margin: 12px 0;
+      overscroll-behavior-x: contain;
+      margin: 12px 0 4px;
+      padding-bottom: 4px;
       scrollbar-width: none;
       -ms-overflow-style: none;
       touch-action: pan-x;
@@ -91,6 +100,7 @@
     }
 
     .vehicle-image-strip img {
+      flex: 0 0 auto;
       min-width: 100px;
       height: 80px;
       object-fit: cover;
@@ -98,60 +108,117 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       cursor: pointer;
       transition: transform 0.2s ease;
+      touch-action: pan-x;
     }
 
     .vehicle-image-strip img:hover {
       transform: scale(1.05);
     }
 
-    /* Info cards: minimal glass style with line divisors */
+    /* Compact dashboard list cards */
     .info-cards,
     .documents-list,
     .maintenance-list {
       display: flex;
       flex-direction: column;
+    }
+
+    .info-cards {
       gap: 0;
+      padding: 0 14px;
+      background: #101827;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+    }
+
+    .documents-list,
+    .maintenance-list {
+      gap: 10px;
     }
 
     .glass-card {
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 0 14px;
+      background: #101827;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+      backdrop-filter: none;
+      min-height: 0;
+      gap: 0;
+      cursor: default;
+      overflow: hidden;
     }
 
-    .glass-card:last-child {
+    .info-cards .glass-card {
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .info-cards .glass-card:last-child {
+      border-bottom: 0;
+    }
+
+    .glass-card:hover,
+    .glass-card:active {
+      transform: none;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+      border-color: rgba(148, 163, 184, 0.14);
+    }
+
+    .info-cards .glass-card:hover,
+    .info-cards .glass-card:active {
+      box-shadow: none;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .info-cards .card-row {
       border-bottom: none;
     }
 
-    .card-title {
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .card-row:last-child {
+      border-bottom: none;
+    }
+
+    .list-label {
       font-size: 14px;
       font-weight: 600;
       color: rgba(255, 255, 255, 0.7);
       margin: 0;
     }
 
-    .card-description {
+    .list-value {
       font-size: 16px;
       font-weight: 500;
-      color: var(--color-text);
+      color: var(--color-title);
       margin: 0;
       text-align: right;
     }
 
-    .doc-card,
-    .maintenance-card {
+    .documents-list .glass-card,
+    .maintenance-list .glass-card {
+      display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: stretch;
     }
 
-    .doc-card .card-description,
-    .maintenance-card .card-description {
-      text-align: left;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.6);
-      margin-top: 4px;
+    .documents-list .list-value,
+    .maintenance-list .list-value {
+      font-size: 14px;
     }
 
     /* Section title */
@@ -165,7 +232,7 @@
     /* Carousel dots: positioned absolute at bottom */
     .carousel-dots {
       position: fixed;
-      bottom: 70px;
+      bottom: calc(var(--bottom-nav-height) + 12px + env(safe-area-inset-bottom));
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -194,10 +261,32 @@
       right: 0;
       flex-shrink: 0;
       z-index: 200;
+      padding: 0 12px;
+    }
+
+    .bottom-nav .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: 4px;
+      min-height: var(--bottom-nav-height);
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+      background: linear-gradient(135deg, #101827, #172235);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(10px);
     }
 
     .bottom-nav .nav-item {
       text-decoration: none;
+      border-radius: 12px;
+      min-height: 52px;
+      padding: 6px 4px;
+    }
+
+    .bottom-nav .nav-item.active {
+      background: rgba(96, 165, 250, 0.12);
     }
   </style>
 </head>
@@ -227,43 +316,59 @@
 
       <div class="info-cards">
         <div class="glass-card">
-          <div class="card-title">Brand</div>
-          <div class="card-description">Toyota</div>
+          <div class="card-row">
+            <div class="list-label">Brand</div>
+            <div class="list-value">Toyota</div>
+          </div>
         </div>
 
         <div class="glass-card">
-          <div class="card-title">Model</div>
-          <div class="card-description">Hilux SRX</div>
+          <div class="card-row">
+            <div class="list-label">Model</div>
+            <div class="list-value">Hilux SRX</div>
+          </div>
         </div>
 
         <div class="glass-card">
-          <div class="card-title">Year</div>
-          <div class="card-description">2023</div>
+          <div class="card-row">
+            <div class="list-label">Year</div>
+            <div class="list-value">2023</div>
+          </div>
         </div>
 
         <div class="glass-card">
-          <div class="card-title">Plate</div>
-          <div class="card-description">RXTT22</div>
+          <div class="card-row">
+            <div class="list-label">Plate</div>
+            <div class="list-value">RXTT22</div>
+          </div>
         </div>
 
         <div class="glass-card">
-          <div class="card-title">Color</div>
-          <div class="card-description">White</div>
+          <div class="card-row">
+            <div class="list-label">Color</div>
+            <div class="list-value">White</div>
+          </div>
         </div>
 
         <div class="glass-card">
-          <div class="card-title">VIN</div>
-          <div class="card-description">JT123456789</div>
+          <div class="card-row">
+            <div class="list-label">VIN</div>
+            <div class="list-value">JT123456789</div>
+          </div>
         </div>
 
         <div class="glass-card">
-          <div class="card-title">Mileage</div>
-          <div class="card-description">58.425 Km</div>
+          <div class="card-row">
+            <div class="list-label">Mileage</div>
+            <div class="list-value">58.425 Km</div>
+          </div>
         </div>
 
         <div class="glass-card">
-          <div class="card-title">City</div>
-          <div class="card-description">Santiago</div>
+          <div class="card-row">
+            <div class="list-label">City</div>
+            <div class="list-value">Santiago</div>
+          </div>
         </div>
       </div>
 
@@ -281,27 +386,63 @@
 
       <div class="documents-list">
         <div class="glass-card doc-card">
-          <div class="card-title">Padrón</div>
-          <div class="card-description">Updated: 01/01/2026</div>
-          <div class="card-description">Permanent</div>
+          <div class="card-row">
+            <div class="list-label">Document</div>
+            <div class="list-value">Padrón</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Updated</div>
+            <div class="list-value">01/01/2026</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Status</div>
+            <div class="list-value">Permanent</div>
+          </div>
         </div>
 
         <div class="glass-card doc-card">
-          <div class="card-title">Permiso Circulación</div>
-          <div class="card-description">Updated: 01/04/2026</div>
-          <div class="card-description">Expires: 31/03/2027</div>
+          <div class="card-row">
+            <div class="list-label">Document</div>
+            <div class="list-value">Permiso Circulación</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Updated</div>
+            <div class="list-value">01/04/2026</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Expires</div>
+            <div class="list-value">31/03/2027</div>
+          </div>
         </div>
 
         <div class="glass-card doc-card">
-          <div class="card-title">Revisión Técnica</div>
-          <div class="card-description">Updated: 15/06/2025</div>
-          <div class="card-description">Expires: 14/06/2026</div>
+          <div class="card-row">
+            <div class="list-label">Document</div>
+            <div class="list-value">Revisión Técnica</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Updated</div>
+            <div class="list-value">15/06/2025</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Expires</div>
+            <div class="list-value">14/06/2026</div>
+          </div>
         </div>
 
         <div class="glass-card doc-card">
-          <div class="card-title">Seguro</div>
-          <div class="card-description">Updated: 10/08/2026</div>
-          <div class="card-description">Expires: 09/08/2027</div>
+          <div class="card-row">
+            <div class="list-label">Document</div>
+            <div class="list-value">Seguro</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Updated</div>
+            <div class="list-value">10/08/2026</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Expires</div>
+            <div class="list-value">09/08/2027</div>
+          </div>
         </div>
       </div>
     </section>
@@ -312,17 +453,41 @@
 
       <div class="maintenance-list">
         <div class="glass-card maintenance-card">
-          <div class="card-title">10/08/2026</div>
-          <div class="card-description">60,000 Km Service</div>
-          <div class="card-description">$420,000</div>
-          <div class="card-description">Oil + Filters + Inspection</div>
+          <div class="card-row">
+            <div class="list-label">Date</div>
+            <div class="list-value">10/08/2026</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Service</div>
+            <div class="list-value">60,000 Km Service</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Cost</div>
+            <div class="list-value">$420,000</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Details</div>
+            <div class="list-value">Oil + Filters + Inspection</div>
+          </div>
         </div>
 
         <div class="glass-card maintenance-card">
-          <div class="card-title">15/03/2026</div>
-          <div class="card-description">Brake Replacement</div>
-          <div class="card-description">$180,000</div>
-          <div class="card-description">Front Brakes</div>
+          <div class="card-row">
+            <div class="list-label">Date</div>
+            <div class="list-value">15/03/2026</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Service</div>
+            <div class="list-value">Brake Replacement</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Cost</div>
+            <div class="list-value">$180,000</div>
+          </div>
+          <div class="card-row">
+            <div class="list-label">Details</div>
+            <div class="list-value">Front Brakes</div>
+          </div>
         </div>
       </div>
     </section>
