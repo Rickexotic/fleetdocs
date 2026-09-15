@@ -23,35 +23,106 @@
     body {
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      height: 100dvh;
+      height: 100vh;
       overflow: hidden;
     }
 
     .app-header {
-      flex: 0 0 auto;
+      flex-shrink: 0;
     }
 
     .vehicle-selector-wrapper {
-      flex: 0 0 auto;
-      padding-bottom: 12px;
+      flex-shrink: 0;
     }
 
-    /* Carousel container: fill remaining space */
+    /* ===== IMAGE CAROUSEL SECTION ===== */
+    .image-section {
+      flex-shrink: 0;
+      padding: 12px;
+      border-bottom: 1px solid rgba(138, 180, 255, 0.08);
+    }
+
+    .section-title {
+      color: var(--color-title);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      margin-top: 0;
+    }
+
+    .vehicle-image-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: 8px;
+      padding: 0;
+      scrollbar-width: none;
+      -ms-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+    }
+
+    .vehicle-image-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .vehicle-image-card {
+      flex: 0 0 calc(80% - 4px);
+      min-width: calc(80% - 4px);
+      max-width: calc(80% - 4px);
+      height: 140px;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--color-panel);
+      border: 1px solid var(--color-panel-border);
+      cursor: pointer;
+      scroll-snap-align: start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .vehicle-image-card:active {
+      transform: scale(0.98);
+    }
+
+    .vehicle-image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .vehicle-image-label {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ===== DATA PAGES CAROUSEL SECTION ===== */
+    .dashboard-pages-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
     .dashboard-carousel {
       display: flex;
-      flex: 1 1 auto;
-      min-height: 0;
+      flex: 1;
       overflow-x: auto;
       overflow-y: hidden;
       scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
-      overscroll-behavior-x: contain;
       gap: 0;
       scrollbar-width: none;
       -ms-overflow-style: none;
-      touch-action: pan-x;
     }
 
     .dashboard-carousel::-webkit-scrollbar {
@@ -60,18 +131,52 @@
 
     .dashboard-page {
       flex: 0 0 100%;
-      min-width: 100%;
+      width: 100%;
+      padding: 12px;
       scroll-snap-align: start;
       box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      padding: 12px 16px calc(var(--bottom-nav-height) + 56px + env(safe-area-inset-bottom));
+      overscroll-behavior: contain;
     }
 
-    /* Header image (Bean.jpg) */
+    /* Dots for page carousel */
+    .carousel-dots {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 0;
+      height: auto;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(148, 163, 184, 0.55);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .dot.active {
+      background: var(--color-accent);
+      transform: scale(1.15);
+    }
+
+    .bottom-nav {
+      flex-shrink: 0;
+      position: relative;
+      bottom: auto;
+      left: auto;
+      right: auto;
+      transform: none;
+      width: 100%;
+      max-width: none;
+      margin: 6px 12px 6px 12px;
+    }
+
+    /* Header image */
     .profile-thumb {
       width: 34px;
       height: 34px;
@@ -81,212 +186,135 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    /* Vehicle image carousel */
-    .vehicle-image-strip {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-x: contain;
-      margin: 12px 0 4px;
-      padding-bottom: 4px;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      touch-action: pan-x;
-    }
-
-    .vehicle-image-strip::-webkit-scrollbar {
-      display: none;
-    }
-
-    .vehicle-image-strip img {
-      flex: 0 0 auto;
-      min-width: 100px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      touch-action: pan-x;
-    }
-
-    .vehicle-image-strip img:hover {
-      transform: scale(1.05);
-    }
-
-    /* Compact dashboard list cards */
-    .info-cards,
-    .documents-list,
-    .maintenance-list {
+    /* Info rows - clean dividers, no cards */
+    .info-rows,
+    .documents-rows,
+    .maintenance-rows {
       display: flex;
       flex-direction: column;
-    }
-
-    .info-cards {
       gap: 0;
-      padding: 0 14px;
-      background: #101827;
-      border: 1px solid rgba(148, 163, 184, 0.14);
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-      overflow: hidden;
     }
 
-    .documents-list,
-    .maintenance-list {
-      gap: 10px;
-    }
-
-    .glass-card {
-      padding: 0 14px;
-      background: #101827;
-      border: 1px solid rgba(148, 163, 184, 0.14);
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-      backdrop-filter: none;
-      min-height: 0;
-      gap: 0;
-      cursor: default;
-      overflow: hidden;
-    }
-
-    .info-cards .glass-card {
-      padding: 0;
-      background: transparent;
-      border: 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    .info-cards .glass-card:last-child {
-      border-bottom: 0;
-    }
-
-    .glass-card:hover,
-    .glass-card:active {
-      transform: none;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-      border-color: rgba(148, 163, 184, 0.14);
-    }
-
-    .info-cards .glass-card:hover,
-    .info-cards .glass-card:active {
-      box-shadow: none;
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .info-cards .card-row {
-      border-bottom: none;
-    }
-
-    .card-row {
+    .info-row,
+    .doc-row,
+    .maintenance-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 16px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(138, 180, 255, 0.08);
     }
 
-    .card-row:last-child {
+    .info-row:last-child,
+    .doc-row:last-child,
+    .maintenance-row:last-child {
       border-bottom: none;
     }
 
-    .list-label {
+    .row-label {
       font-size: 14px;
       font-weight: 600;
-      color: rgba(255, 255, 255, 0.7);
-      margin: 0;
-    }
-
-    .list-value {
-      font-size: 16px;
-      font-weight: 500;
       color: var(--color-title);
-      margin: 0;
-      text-align: right;
+      flex: 0 0 auto;
     }
 
-    .documents-list .glass-card,
-    .maintenance-list .glass-card {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .documents-list .list-value,
-    .maintenance-list .list-value {
+    .row-value {
       font-size: 14px;
+      color: var(--color-text);
+      text-align: right;
+      flex: 1;
+      margin-left: 16px;
     }
 
-    /* Section title */
-    .section-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin: 0 0 16px 0;
-      color: var(--color-title);
-    }
-
-    /* Carousel dots: positioned absolute at bottom */
-    .carousel-dots {
-      position: fixed;
-      bottom: calc(var(--bottom-nav-height) + 12px + env(safe-area-inset-bottom));
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 8px;
-      z-index: 100;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .dot.active {
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    /* Bottom nav: fixed at bottom */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      flex-shrink: 0;
-      z-index: 200;
-      padding: 0 12px;
-    }
-
-    .bottom-nav .nav-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      gap: 4px;
-      min-height: var(--bottom-nav-height);
-      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-      background: linear-gradient(135deg, #101827, #172235);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 18px 18px 0 0;
-      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(10px);
+    .row-value-secondary {
+      font-size: 12px;
+      color: var(--color-icon-muted);
+      margin-top: 2px;
     }
 
     .bottom-nav .nav-item {
       text-decoration: none;
-      border-radius: 12px;
-      min-height: 52px;
-      padding: 6px 4px;
     }
 
-    .bottom-nav .nav-item.active {
-      background: rgba(96, 165, 250, 0.12);
+    /* Full-screen image modal */
+    #imageModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 12px;
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+
+    #imageModal.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .image-modal-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .image-modal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .image-modal-label {
+      position: absolute;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+      z-index: 10000;
+    }
+
+    .modal-close-btn:active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      .dashboard-carousel,
+      .vehicle-image-carousel,
+      .vehicle-image-card,
+      .dot,
+      #imageModal {
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -308,283 +336,259 @@
     </div>
   </section>
 
-  <!-- SWIPE PAGES -->
-  <div id="dashboardCarousel" class="dashboard-carousel">
-    <!-- PAGE 1 -->
-    <section class="dashboard-page">
-      <h2 class="section-title">Vehicle Information</h2>
-
-      <div class="info-cards">
-        <div class="glass-card">
-          <div class="card-row">
-            <div class="list-label">Brand</div>
-            <div class="list-value">Toyota</div>
-          </div>
-        </div>
-
-        <div class="glass-card">
-          <div class="card-row">
-            <div class="list-label">Model</div>
-            <div class="list-value">Hilux SRX</div>
-          </div>
-        </div>
-
-        <div class="glass-card">
-          <div class="card-row">
-            <div class="list-label">Year</div>
-            <div class="list-value">2023</div>
-          </div>
-        </div>
-
-        <div class="glass-card">
-          <div class="card-row">
-            <div class="list-label">Plate</div>
-            <div class="list-value">RXTT22</div>
-          </div>
-        </div>
-
-        <div class="glass-card">
-          <div class="card-row">
-            <div class="list-label">Color</div>
-            <div class="list-value">White</div>
-          </div>
-        </div>
-
-        <div class="glass-card">
-          <div class="card-row">
-            <div class="list-label">VIN</div>
-            <div class="list-value">JT123456789</div>
-          </div>
-        </div>
-
-        <div class="glass-card">
-          <div class="card-row">
-            <div class="list-label">Mileage</div>
-            <div class="list-value">58.425 Km</div>
-          </div>
-        </div>
-
-        <div class="glass-card">
-          <div class="card-row">
-            <div class="list-label">City</div>
-            <div class="list-value">Santiago</div>
-          </div>
-        </div>
+  <!-- IMAGE CAROUSEL SECTION (Fixed height, independent scroll) -->
+  <section class="image-section">
+    <h2 class="section-title">Vehicle Images</h2>
+    <div class="vehicle-image-carousel">
+      <div class="vehicle-image-card" onclick="openImageModal(this)">
+        <img src="./images/Fotodiagonla.png" alt="Diagonal View" />
+        <div class="vehicle-image-label">Diagonal</div>
       </div>
-
-      <div class="vehicle-image-strip">
-        <img src="./images/Fotodiagonla.png" alt="Vehicle 1" />
-        <img src="./images/Fotofrontal.png" alt="Vehicle 2" />
-        <img src="./images/Fotolateral.png" alt="Vehicle 3" />
-        <img src="./images/Fototrasera.png" alt="Vehicle 4" />
+      <div class="vehicle-image-card" onclick="openImageModal(this)">
+        <img src="./images/Fotofrontal.png" alt="Front View" />
+        <div class="vehicle-image-label">Front</div>
       </div>
-    </section>
-
-    <!-- PAGE 2 -->
-    <section class="dashboard-page">
-      <h2 class="section-title">Vehicle Documentation</h2>
-
-      <div class="documents-list">
-        <div class="glass-card doc-card">
-          <div class="card-row">
-            <div class="list-label">Document</div>
-            <div class="list-value">Padrón</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Updated</div>
-            <div class="list-value">01/01/2026</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Status</div>
-            <div class="list-value">Permanent</div>
-          </div>
-        </div>
-
-        <div class="glass-card doc-card">
-          <div class="card-row">
-            <div class="list-label">Document</div>
-            <div class="list-value">Permiso Circulación</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Updated</div>
-            <div class="list-value">01/04/2026</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Expires</div>
-            <div class="list-value">31/03/2027</div>
-          </div>
-        </div>
-
-        <div class="glass-card doc-card">
-          <div class="card-row">
-            <div class="list-label">Document</div>
-            <div class="list-value">Revisión Técnica</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Updated</div>
-            <div class="list-value">15/06/2025</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Expires</div>
-            <div class="list-value">14/06/2026</div>
-          </div>
-        </div>
-
-        <div class="glass-card doc-card">
-          <div class="card-row">
-            <div class="list-label">Document</div>
-            <div class="list-value">Seguro</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Updated</div>
-            <div class="list-value">10/08/2026</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Expires</div>
-            <div class="list-value">09/08/2027</div>
-          </div>
-        </div>
+      <div class="vehicle-image-card" onclick="openImageModal(this)">
+        <img src="./images/Fotolateral.png" alt="Side View" />
+        <div class="vehicle-image-label">Side</div>
       </div>
-    </section>
-
-    <!-- PAGE 3 -->
-    <section class="dashboard-page">
-      <h2 class="section-title">Maintenance History</h2>
-
-      <div class="maintenance-list">
-        <div class="glass-card maintenance-card">
-          <div class="card-row">
-            <div class="list-label">Date</div>
-            <div class="list-value">10/08/2026</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Service</div>
-            <div class="list-value">60,000 Km Service</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Cost</div>
-            <div class="list-value">$420,000</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Details</div>
-            <div class="list-value">Oil + Filters + Inspection</div>
-          </div>
-        </div>
-
-        <div class="glass-card maintenance-card">
-          <div class="card-row">
-            <div class="list-label">Date</div>
-            <div class="list-value">15/03/2026</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Service</div>
-            <div class="list-value">Brake Replacement</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Cost</div>
-            <div class="list-value">$180,000</div>
-          </div>
-          <div class="card-row">
-            <div class="list-label">Details</div>
-            <div class="list-value">Front Brakes</div>
-          </div>
-        </div>
+      <div class="vehicle-image-card" onclick="openImageModal(this)">
+        <img src="./images/Fototrasera.png" alt="Rear View" />
+        <div class="vehicle-image-label">Rear</div>
       </div>
-    </section>
+    </div>
+  </section>
+
+  <!-- DATA PAGES CAROUSEL SECTION (Fills remaining space, swipeable pages) -->
+  <div class="dashboard-pages-container">
+    <div id="dashboardCarousel" class="dashboard-carousel">
+      <!-- PAGE 1: Vehicle Information -->
+      <section class="dashboard-page">
+        <h2 class="section-title">Vehicle Information</h2>
+
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="row-label">Brand</span>
+            <span class="row-value">Toyota</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">Model</span>
+            <span class="row-value">Hilux SRX</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">Year</span>
+            <span class="row-value">2023</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">Plate</span>
+            <span class="row-value">RXTT22</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">Color</span>
+            <span class="row-value">White</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">VIN</span>
+            <span class="row-value">JT123456789</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">Mileage</span>
+            <span class="row-value">58.425 Km</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">City</span>
+            <span class="row-value">Santiago</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 2: Vehicle Documentation -->
+      <section class="dashboard-page">
+        <h2 class="section-title">Vehicle Documentation</h2>
+
+        <div class="documents-rows">
+          <div class="doc-row">
+            <span class="row-label">Padrón</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/01/2026</div>
+              <div class="row-value row-value-secondary">Permanent</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Permiso Circulación</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/04/2026</div>
+              <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Revisión Técnica</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/08/2026</div>
+              <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Revisión Gases</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/08/2026</div>
+              <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">SOAP</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/04/2026</div>
+              <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Seguro Vehículo</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/09/2026</div>
+              <div class="row-value row-value-secondary">Expires: 01/09/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Extintor</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 20/03/2026</div>
+              <div class="row-value row-value-secondary">Expires: 20/03/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Cambio de Aceite</span>
+            <div style="text-align: right;">
+              <div class="row-value">10/09/2026</div>
+              <div class="row-value row-value-secondary">Next: 70.000 Km</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 3: Maintenance History -->
+      <section class="dashboard-page">
+        <h2 class="section-title">Maintenance History</h2>
+
+        <div class="maintenance-rows">
+          <div class="maintenance-row">
+            <span class="row-label">10/08/2026</span>
+            <div style="text-align: right;">
+              <div class="row-value">60.000 Km Service</div>
+              <div class="row-value row-value-secondary" style="color: var(--color-accent);">$420.000</div>
+              <div class="row-value row-value-secondary">Oil + Filters + Inspection</div>
+            </div>
+          </div>
+
+          <div class="maintenance-row">
+            <span class="row-label">15/03/2026</span>
+            <div style="text-align: right;">
+              <div class="row-value">Brake Replacement</div>
+              <div class="row-value row-value-secondary" style="color: var(--color-accent);">$180.000</div>
+              <div class="row-value row-value-secondary">Front Brakes</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- DOTS for page carousel -->
+    <div class="carousel-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
   </div>
 
-  <!-- CAROUSEL DOTS -->
-  <div class="carousel-dots">
-    <div class="dot active" data-page="0"></div>
-    <div class="dot" data-page="1"></div>
-    <div class="dot" data-page="2"></div>
+  <!-- FULL-SCREEN IMAGE MODAL -->
+  <div id="imageModal">
+    <div class="image-modal-content">
+      <button class="modal-close-btn" onclick="closeImageModal()">✕</button>
+      <img id="modalImage" class="image-modal-img" src="" alt="Vehicle Image" />
+      <div class="image-modal-label" id="modalLabel"></div>
+    </div>
   </div>
 
   <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
-    <div class="nav-content">
-      <a href="./dashboard.html" class="nav-item active">
-        <span class="nav-icon">🏠</span>
-        <span class="nav-label">Home</span>
-      </a>
-      <a href="./vehicles.html" class="nav-item">
-        <span class="nav-icon">🚗</span>
-        <span class="nav-label">Vehicles</span>
-      </a>
-      <a href="./documents.html" class="nav-item">
-        <span class="nav-icon">📄</span>
-        <span class="nav-label">Documents</span>
-      </a>
-      <a href="./alerts.html" class="nav-item">
-        <span class="nav-icon">🔔</span>
-        <span class="nav-label">Alerts</span>
-      </a>
-      <a href="./settings.html" class="nav-item">
-        <span class="nav-icon">⚙️</span>
-        <span class="nav-label">Settings</span>
-      </a>
-    </div>
+    <a href="dashboard.html" class="nav-item active">
+      <span class="nav-label">Home</span>
+    </a>
+
+    <a href="vehicles.html" class="nav-item">
+      <span class="nav-label">Vehicles</span>
+    </a>
+
+    <a href="documents.html" class="nav-item">
+      <span class="nav-label">Documents</span>
+    </a>
+
+    <a href="alerts.html" class="nav-item">
+      <span class="nav-label">Alerts</span>
+    </a>
+
+    <a href="settings.html" class="nav-item">
+      <span class="nav-label">Settings</span>
+    </a>
   </nav>
 
   <script>
-    const carousel = document.getElementById('dashboardCarousel');
-    const dots = document.querySelectorAll('.dot');
-    let currentPage = 0;
+    // Dashboard carousel dots sync
+    const carousel = document.getElementById("dashboardCarousel");
+    const dots = document.querySelectorAll(".dot");
 
-    // Update dots on scroll
-    carousel.addEventListener('scroll', () => {
-      const scrollPos = carousel.scrollLeft;
-      const pageWidth = carousel.offsetWidth;
-      currentPage = Math.round(scrollPos / pageWidth);
-
-      dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentPage);
-      });
+    carousel.addEventListener("scroll", () => {
+      const page = Math.round(carousel.scrollLeft / carousel.clientWidth);
+      dots.forEach((dot) => dot.classList.remove("active"));
+      if (dots[page]) dots[page].classList.add("active");
     });
 
-    // Click dots to navigate
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        carousel.scrollTo({
-          left: index * carousel.offsetWidth,
-          behavior: 'smooth'
-        });
-      });
+    // Image modal functionality
+    function openImageModal(cardElement) {
+      const img = cardElement.querySelector("img");
+      const label = cardElement.querySelector(".vehicle-image-label");
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImage");
+      const modalLabel = document.getElementById("modalLabel");
+
+      modalImg.src = img.src;
+      modalLabel.textContent = label.textContent;
+      modal.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById("imageModal");
+      modal.classList.remove("show");
+      document.body.style.overflow = "auto";
+    }
+
+    // Close modal on ESC key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeImageModal();
+      }
     });
 
-    // Image click handler for fullscreen
-    document.querySelectorAll('.vehicle-image-strip img').forEach(img => {
-      img.addEventListener('click', function() {
-        const fullscreenContainer = document.createElement('div');
-        fullscreenContainer.style.cssText = `
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.95);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 9999;
-          cursor: zoom-out;
-        `;
-
-        const fullscreenImg = document.createElement('img');
-        fullscreenImg.src = this.src;
-        fullscreenImg.style.cssText = `
-          max-width: 90vw;
-          max-height: 90vh;
-          object-fit: contain;
-        `;
-
-        fullscreenContainer.appendChild(fullscreenImg);
-        document.body.appendChild(fullscreenContainer);
-
-        fullscreenContainer.addEventListener('click', () => {
-          fullscreenContainer.remove();
-        });
-      });
+    // Close modal on outside click
+    document.getElementById("imageModal").addEventListener("click", (e) => {
+      if (e.target.id === "imageModal") {
+        closeImageModal();
+      }
     });
   </script>
 </body>
