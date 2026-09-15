@@ -19,15 +19,31 @@
   <link rel="stylesheet" href="./css/main.css?v=4" />
 
   <style>
-    /* Fill available screen space */
+    /* CRITICAL: Fill ALL available vertical space */
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .app-header {
+      flex-shrink: 0;
+    }
+
+    .vehicle-selector-wrapper {
+      flex-shrink: 0;
+    }
+
+    /* Fill ALL remaining space */
     .dashboard-carousel {
       display: flex;
+      flex: 1;
       overflow-x: auto;
+      overflow-y: hidden;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       gap: 0;
-      /* Height: 100vh - header (50px) - dots (40px) - bottom-nav (72px) - padding (12px) */
-      height: calc(100vh - 50px - 40px - 72px - 12px);
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
@@ -47,6 +63,42 @@
       overscroll-behavior: contain;
     }
 
+    /* Fixed footer elements */
+    .carousel-dots {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 0;
+      height: auto;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(148, 163, 184, 0.55);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .dot.active {
+      background: var(--color-accent);
+      transform: scale(1.15);
+    }
+
+    .bottom-nav {
+      flex-shrink: 0;
+      position: relative;
+      bottom: auto;
+      left: auto;
+      right: auto;
+      transform: none;
+      width: 100%;
+      max-width: none;
+      margin: 6px 12px 6px 12px;
+    }
+
     /* Header image (Bean.jpg) */
     .profile-thumb {
       width: 34px;
@@ -62,6 +114,7 @@
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 12px;
+      margin-top: 0;
     }
 
     /* Vehicle image carousel */
@@ -230,30 +283,6 @@
       margin: 1px 0;
     }
 
-    /* Carousel dots */
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 6px;
-      margin-bottom: 8px;
-      height: 20px;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(148, 163, 184, 0.55);
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .dot.active {
-      background: var(--color-accent);
-      transform: scale(1.15);
-    }
-
     .bottom-nav .nav-item {
       text-decoration: none;
     }
@@ -288,7 +317,7 @@
     </div>
   </section>
 
-  <!-- SWIPE PAGES -->
+  <!-- SWIPE PAGES - Fills all remaining space -->
   <div id="dashboardCarousel" class="dashboard-carousel">
     <!-- PAGE 1: Vehicle Information -->
     <section class="dashboard-page">
