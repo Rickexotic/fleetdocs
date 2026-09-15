@@ -35,7 +35,84 @@
       flex-shrink: 0;
     }
 
-    /* Fill ALL remaining space */
+    /* ===== IMAGE CAROUSEL SECTION ===== */
+    .image-section {
+      flex-shrink: 0;
+      padding: 12px;
+      border-bottom: 1px solid rgba(138, 180, 255, 0.08);
+    }
+
+    .section-title {
+      color: var(--color-title);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      margin-top: 0;
+    }
+
+    .vehicle-image-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: 8px;
+      padding: 0;
+      scrollbar-width: none;
+      -ms-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+    }
+
+    .vehicle-image-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .vehicle-image-card {
+      flex: 0 0 calc(80% - 4px);
+      min-width: calc(80% - 4px);
+      max-width: calc(80% - 4px);
+      height: 140px;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--color-panel);
+      border: 1px solid var(--color-panel-border);
+      cursor: pointer;
+      scroll-snap-align: start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .vehicle-image-card:active {
+      transform: scale(0.98);
+    }
+
+    .vehicle-image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .vehicle-image-label {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ===== DATA PAGES CAROUSEL SECTION ===== */
+    .dashboard-pages-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
     .dashboard-carousel {
       display: flex;
       flex: 1;
@@ -63,7 +140,7 @@
       overscroll-behavior: contain;
     }
 
-    /* Fixed footer elements */
+    /* Dots for page carousel */
     .carousel-dots {
       flex-shrink: 0;
       display: flex;
@@ -99,7 +176,7 @@
       margin: 6px 12px 6px 12px;
     }
 
-    /* Header image (Bean.jpg) */
+    /* Header image */
     .profile-thumb {
       width: 34px;
       height: 34px;
@@ -109,72 +186,54 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    .section-title {
-      color: var(--color-title);
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      margin-top: 0;
-    }
-
-    /* Vehicle image carousel */
-    .vehicle-image-carousel-container {
-      margin-bottom: 16px;
-    }
-
-    .vehicle-image-carousel {
+    /* Info rows - clean dividers, no cards */
+    .info-rows,
+    .documents-rows,
+    .maintenance-rows {
       display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      gap: 8px;
-      padding: 0 0 8px 0;
-      scrollbar-width: none;
-      -ms-overflow-scrolling: touch;
-      overscroll-behavior-x: contain;
+      flex-direction: column;
+      gap: 0;
     }
 
-    .vehicle-image-carousel::-webkit-scrollbar {
-      display: none;
+    .info-row,
+    .doc-row,
+    .maintenance-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(138, 180, 255, 0.08);
     }
 
-    .vehicle-image-card {
-      flex: 0 0 calc(80% - 16px);
-      min-width: calc(80% - 16px);
-      max-width: calc(80% - 16px);
-      height: 140px;
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      background: var(--color-panel);
-      border: 1px solid var(--color-panel-border);
-      cursor: pointer;
-      scroll-snap-align: start;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    .info-row:last-child,
+    .doc-row:last-child,
+    .maintenance-row:last-child {
+      border-bottom: none;
     }
 
-    .vehicle-image-card:active {
-      transform: scale(0.98);
-    }
-
-    .vehicle-image-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .vehicle-image-label {
-      position: absolute;
-      bottom: 8px;
-      left: 8px;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 12px;
+    .row-label {
+      font-size: 14px;
       font-weight: 600;
-      backdrop-filter: blur(4px);
+      color: var(--color-title);
+      flex: 0 0 auto;
+    }
+
+    .row-value {
+      font-size: 14px;
+      color: var(--color-text);
+      text-align: right;
+      flex: 1;
+      margin-left: 16px;
+    }
+
+    .row-value-secondary {
+      font-size: 12px;
+      color: var(--color-icon-muted);
+      margin-top: 2px;
+    }
+
+    .bottom-nav .nav-item {
+      text-decoration: none;
     }
 
     /* Full-screen image modal */
@@ -247,56 +306,6 @@
       background: rgba(255, 255, 255, 0.2);
     }
 
-    /* Info rows - clean dividers, no cards */
-    .info-rows,
-    .documents-rows,
-    .maintenance-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .info-row,
-    .doc-row,
-    .maintenance-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(138, 180, 255, 0.08);
-    }
-
-    .info-row:last-child,
-    .doc-row:last-child,
-    .maintenance-row:last-child {
-      border-bottom: none;
-    }
-
-    .row-label {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--color-title);
-      flex: 0 0 auto;
-    }
-
-    .row-value {
-      font-size: 14px;
-      color: var(--color-text);
-      text-align: right;
-      flex: 1;
-      margin-left: 16px;
-    }
-
-    .row-value-secondary {
-      font-size: 12px;
-      color: var(--color-icon-muted);
-      margin-top: 2px;
-    }
-
-    .bottom-nav .nav-item {
-      text-decoration: none;
-    }
-
     /* Reduce motion */
     @media (prefers-reduced-motion: reduce) {
       .dashboard-carousel,
@@ -327,181 +336,182 @@
     </div>
   </section>
 
-  <!-- SWIPE PAGES - Fills all remaining space -->
-  <div id="dashboardCarousel" class="dashboard-carousel">
-    <!-- PAGE 1: Vehicle Information -->
-    <section class="dashboard-page">
-      <h2 class="section-title">Vehicle Images</h2>
-
-      <!-- Vehicle Image Carousel -->
-      <div class="vehicle-image-carousel-container">
-        <div class="vehicle-image-carousel">
-          <div class="vehicle-image-card" onclick="openImageModal(this)">
-            <img src="./images/Fotodiagonla.png" alt="Diagonal View" />
-            <div class="vehicle-image-label">Diagonal</div>
-          </div>
-          <div class="vehicle-image-card" onclick="openImageModal(this)">
-            <img src="./images/Fotofrontal.png" alt="Front View" />
-            <div class="vehicle-image-label">Front</div>
-          </div>
-          <div class="vehicle-image-card" onclick="openImageModal(this)">
-            <img src="./images/Fotolateral.png" alt="Side View" />
-            <div class="vehicle-image-label">Side</div>
-          </div>
-          <div class="vehicle-image-card" onclick="openImageModal(this)">
-            <img src="./images/Fototrasera.png" alt="Rear View" />
-            <div class="vehicle-image-label">Rear</div>
-          </div>
-        </div>
+  <!-- IMAGE CAROUSEL SECTION (Fixed height, independent scroll) -->
+  <section class="image-section">
+    <h2 class="section-title">Vehicle Images</h2>
+    <div class="vehicle-image-carousel">
+      <div class="vehicle-image-card" onclick="openImageModal(this)">
+        <img src="./images/Fotodiagonla.png" alt="Diagonal View" />
+        <div class="vehicle-image-label">Diagonal</div>
       </div>
-
-      <h2 class="section-title">Vehicle Information</h2>
-
-      <div class="info-rows">
-        <div class="info-row">
-          <span class="row-label">Brand</span>
-          <span class="row-value">Toyota</span>
-        </div>
-
-        <div class="info-row">
-          <span class="row-label">Model</span>
-          <span class="row-value">Hilux SRX</span>
-        </div>
-
-        <div class="info-row">
-          <span class="row-label">Year</span>
-          <span class="row-value">2023</span>
-        </div>
-
-        <div class="info-row">
-          <span class="row-label">Plate</span>
-          <span class="row-value">RXTT22</span>
-        </div>
-
-        <div class="info-row">
-          <span class="row-label">Color</span>
-          <span class="row-value">White</span>
-        </div>
-
-        <div class="info-row">
-          <span class="row-label">VIN</span>
-          <span class="row-value">JT123456789</span>
-        </div>
-
-        <div class="info-row">
-          <span class="row-label">Mileage</span>
-          <span class="row-value">58.425 Km</span>
-        </div>
-
-        <div class="info-row">
-          <span class="row-label">City</span>
-          <span class="row-value">Santiago</span>
-        </div>
+      <div class="vehicle-image-card" onclick="openImageModal(this)">
+        <img src="./images/Fotofrontal.png" alt="Front View" />
+        <div class="vehicle-image-label">Front</div>
       </div>
-    </section>
-
-    <!-- PAGE 2: Vehicle Documentation -->
-    <section class="dashboard-page">
-      <h2 class="section-title">Vehicle Documentation</h2>
-
-      <div class="documents-rows">
-        <div class="doc-row">
-          <span class="row-label">Padrón</span>
-          <div style="text-align: right;">
-            <div class="row-value">Updated: 01/01/2026</div>
-            <div class="row-value row-value-secondary">Permanent</div>
-          </div>
-        </div>
-
-        <div class="doc-row">
-          <span class="row-label">Permiso Circulación</span>
-          <div style="text-align: right;">
-            <div class="row-value">Updated: 01/04/2026</div>
-            <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
-          </div>
-        </div>
-
-        <div class="doc-row">
-          <span class="row-label">Revisión Técnica</span>
-          <div style="text-align: right;">
-            <div class="row-value">Updated: 01/08/2026</div>
-            <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
-          </div>
-        </div>
-
-        <div class="doc-row">
-          <span class="row-label">Revisión Gases</span>
-          <div style="text-align: right;">
-            <div class="row-value">Updated: 01/08/2026</div>
-            <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
-          </div>
-        </div>
-
-        <div class="doc-row">
-          <span class="row-label">SOAP</span>
-          <div style="text-align: right;">
-            <div class="row-value">Updated: 01/04/2026</div>
-            <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
-          </div>
-        </div>
-
-        <div class="doc-row">
-          <span class="row-label">Seguro Vehículo</span>
-          <div style="text-align: right;">
-            <div class="row-value">Updated: 01/09/2026</div>
-            <div class="row-value row-value-secondary">Expires: 01/09/2027</div>
-          </div>
-        </div>
-
-        <div class="doc-row">
-          <span class="row-label">Extintor</span>
-          <div style="text-align: right;">
-            <div class="row-value">Updated: 20/03/2026</div>
-            <div class="row-value row-value-secondary">Expires: 20/03/2027</div>
-          </div>
-        </div>
-
-        <div class="doc-row">
-          <span class="row-label">Cambio de Aceite</span>
-          <div style="text-align: right;">
-            <div class="row-value">10/09/2026</div>
-            <div class="row-value row-value-secondary">Next: 70.000 Km</div>
-          </div>
-        </div>
+      <div class="vehicle-image-card" onclick="openImageModal(this)">
+        <img src="./images/Fotolateral.png" alt="Side View" />
+        <div class="vehicle-image-label">Side</div>
       </div>
-    </section>
-
-    <!-- PAGE 3: Maintenance History -->
-    <section class="dashboard-page">
-      <h2 class="section-title">Maintenance History</h2>
-
-      <div class="maintenance-rows">
-        <div class="maintenance-row">
-          <span class="row-label">10/08/2026</span>
-          <div style="text-align: right;">
-            <div class="row-value">60.000 Km Service</div>
-            <div class="row-value row-value-secondary" style="color: var(--color-accent);">$420.000</div>
-            <div class="row-value row-value-secondary">Oil + Filters + Inspection</div>
-          </div>
-        </div>
-
-        <div class="maintenance-row">
-          <span class="row-label">15/03/2026</span>
-          <div style="text-align: right;">
-            <div class="row-value">Brake Replacement</div>
-            <div class="row-value row-value-secondary" style="color: var(--color-accent);">$180.000</div>
-            <div class="row-value row-value-secondary">Front Brakes</div>
-          </div>
-        </div>
+      <div class="vehicle-image-card" onclick="openImageModal(this)">
+        <img src="./images/Fototrasera.png" alt="Rear View" />
+        <div class="vehicle-image-label">Rear</div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <!-- DOTS -->
-  <div class="carousel-dots">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
+  <!-- DATA PAGES CAROUSEL SECTION (Fills remaining space, swipeable pages) -->
+  <div class="dashboard-pages-container">
+    <div id="dashboardCarousel" class="dashboard-carousel">
+      <!-- PAGE 1: Vehicle Information -->
+      <section class="dashboard-page">
+        <h2 class="section-title">Vehicle Information</h2>
+
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="row-label">Brand</span>
+            <span class="row-value">Toyota</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">Model</span>
+            <span class="row-value">Hilux SRX</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">Year</span>
+            <span class="row-value">2023</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">Plate</span>
+            <span class="row-value">RXTT22</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">Color</span>
+            <span class="row-value">White</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">VIN</span>
+            <span class="row-value">JT123456789</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">Mileage</span>
+            <span class="row-value">58.425 Km</span>
+          </div>
+
+          <div class="info-row">
+            <span class="row-label">City</span>
+            <span class="row-value">Santiago</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 2: Vehicle Documentation -->
+      <section class="dashboard-page">
+        <h2 class="section-title">Vehicle Documentation</h2>
+
+        <div class="documents-rows">
+          <div class="doc-row">
+            <span class="row-label">Padrón</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/01/2026</div>
+              <div class="row-value row-value-secondary">Permanent</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Permiso Circulación</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/04/2026</div>
+              <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Revisión Técnica</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/08/2026</div>
+              <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Revisión Gases</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/08/2026</div>
+              <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">SOAP</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/04/2026</div>
+              <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Seguro Vehículo</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 01/09/2026</div>
+              <div class="row-value row-value-secondary">Expires: 01/09/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Extintor</span>
+            <div style="text-align: right;">
+              <div class="row-value">Updated: 20/03/2026</div>
+              <div class="row-value row-value-secondary">Expires: 20/03/2027</div>
+            </div>
+          </div>
+
+          <div class="doc-row">
+            <span class="row-label">Cambio de Aceite</span>
+            <div style="text-align: right;">
+              <div class="row-value">10/09/2026</div>
+              <div class="row-value row-value-secondary">Next: 70.000 Km</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 3: Maintenance History -->
+      <section class="dashboard-page">
+        <h2 class="section-title">Maintenance History</h2>
+
+        <div class="maintenance-rows">
+          <div class="maintenance-row">
+            <span class="row-label">10/08/2026</span>
+            <div style="text-align: right;">
+              <div class="row-value">60.000 Km Service</div>
+              <div class="row-value row-value-secondary" style="color: var(--color-accent);">$420.000</div>
+              <div class="row-value row-value-secondary">Oil + Filters + Inspection</div>
+            </div>
+          </div>
+
+          <div class="maintenance-row">
+            <span class="row-label">15/03/2026</span>
+            <div style="text-align: right;">
+              <div class="row-value">Brake Replacement</div>
+              <div class="row-value row-value-secondary" style="color: var(--color-accent);">$180.000</div>
+              <div class="row-value row-value-secondary">Front Brakes</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- DOTS for page carousel -->
+    <div class="carousel-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
   </div>
 
   <!-- FULL-SCREEN IMAGE MODAL -->
