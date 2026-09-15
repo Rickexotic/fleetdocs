@@ -113,7 +113,7 @@
       color: var(--color-title);
       font-size: 16px;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
       margin-top: 0;
     }
 
@@ -142,7 +142,7 @@
       flex: 0 0 calc(80% - 16px);
       min-width: calc(80% - 16px);
       max-width: calc(80% - 16px);
-      height: 120px;
+      height: 140px;
       position: relative;
       border-radius: 16px;
       overflow: hidden;
@@ -247,40 +247,50 @@
       background: rgba(255, 255, 255, 0.2);
     }
 
-    /* Info cards */
-    .info-cards,
-    .documents-list,
-    .maintenance-list {
+    /* Info rows - clean dividers, no cards */
+    .info-rows,
+    .documents-rows,
+    .maintenance-rows {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 0;
     }
 
-    .glass-card {
-      padding: 12px;
-      min-height: auto;
-      border-radius: 14px;
-    }
-
-    .doc-card,
-    .maintenance-card {
+    .info-row,
+    .doc-row,
+    .maintenance-row {
+      display: flex;
+      justify-content: space-between;
       align-items: flex-start;
-      text-align: left;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(138, 180, 255, 0.08);
     }
 
-    .card-title {
-      font-size: 13px;
+    .info-row:last-child,
+    .doc-row:last-child,
+    .maintenance-row:last-child {
+      border-bottom: none;
+    }
+
+    .row-label {
+      font-size: 14px;
       font-weight: 600;
       color: var(--color-title);
-      margin-bottom: 4px;
-      line-height: 1.2;
+      flex: 0 0 auto;
     }
 
-    .card-description {
-      font-size: 11px;
+    .row-value {
+      font-size: 14px;
       color: var(--color-text);
-      line-height: 1.3;
-      margin: 1px 0;
+      text-align: right;
+      flex: 1;
+      margin-left: 16px;
+    }
+
+    .row-value-secondary {
+      font-size: 12px;
+      color: var(--color-icon-muted);
+      margin-top: 2px;
     }
 
     .bottom-nav .nav-item {
@@ -347,45 +357,45 @@
 
       <h2 class="section-title">Vehicle Information</h2>
 
-      <div class="info-cards">
-        <div class="glass-card">
-          <div class="card-title">Brand</div>
-          <div class="card-description">Toyota</div>
+      <div class="info-rows">
+        <div class="info-row">
+          <span class="row-label">Brand</span>
+          <span class="row-value">Toyota</span>
         </div>
 
-        <div class="glass-card">
-          <div class="card-title">Model</div>
-          <div class="card-description">Hilux SRX</div>
+        <div class="info-row">
+          <span class="row-label">Model</span>
+          <span class="row-value">Hilux SRX</span>
         </div>
 
-        <div class="glass-card">
-          <div class="card-title">Year</div>
-          <div class="card-description">2023</div>
+        <div class="info-row">
+          <span class="row-label">Year</span>
+          <span class="row-value">2023</span>
         </div>
 
-        <div class="glass-card">
-          <div class="card-title">Plate</div>
-          <div class="card-description">RXTT22</div>
+        <div class="info-row">
+          <span class="row-label">Plate</span>
+          <span class="row-value">RXTT22</span>
         </div>
 
-        <div class="glass-card">
-          <div class="card-title">Color</div>
-          <div class="card-description">White</div>
+        <div class="info-row">
+          <span class="row-label">Color</span>
+          <span class="row-value">White</span>
         </div>
 
-        <div class="glass-card">
-          <div class="card-title">VIN</div>
-          <div class="card-description">JT123456789</div>
+        <div class="info-row">
+          <span class="row-label">VIN</span>
+          <span class="row-value">JT123456789</span>
         </div>
 
-        <div class="glass-card">
-          <div class="card-title">Mileage</div>
-          <div class="card-description">58.425 Km</div>
+        <div class="info-row">
+          <span class="row-label">Mileage</span>
+          <span class="row-value">58.425 Km</span>
         </div>
 
-        <div class="glass-card">
-          <div class="card-title">City</div>
-          <div class="card-description">Santiago</div>
+        <div class="info-row">
+          <span class="row-label">City</span>
+          <span class="row-value">Santiago</span>
         </div>
       </div>
     </section>
@@ -394,53 +404,69 @@
     <section class="dashboard-page">
       <h2 class="section-title">Vehicle Documentation</h2>
 
-      <div class="documents-list">
-        <div class="glass-card doc-card">
-          <div class="card-title">Padrón</div>
-          <div class="card-description">Updated: 01/01/2026</div>
-          <div class="card-description">Permanent</div>
+      <div class="documents-rows">
+        <div class="doc-row">
+          <span class="row-label">Padrón</span>
+          <div style="text-align: right;">
+            <div class="row-value">Updated: 01/01/2026</div>
+            <div class="row-value row-value-secondary">Permanent</div>
+          </div>
         </div>
 
-        <div class="glass-card doc-card">
-          <div class="card-title">Permiso Circulación</div>
-          <div class="card-description">Updated: 01/04/2026</div>
-          <div class="card-description">Expires: 31/03/2027</div>
+        <div class="doc-row">
+          <span class="row-label">Permiso Circulación</span>
+          <div style="text-align: right;">
+            <div class="row-value">Updated: 01/04/2026</div>
+            <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
+          </div>
         </div>
 
-        <div class="glass-card doc-card">
-          <div class="card-title">Revisión Técnica</div>
-          <div class="card-description">Updated: 01/08/2026</div>
-          <div class="card-description">Expires: 01/08/2027</div>
+        <div class="doc-row">
+          <span class="row-label">Revisión Técnica</span>
+          <div style="text-align: right;">
+            <div class="row-value">Updated: 01/08/2026</div>
+            <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
+          </div>
         </div>
 
-        <div class="glass-card doc-card">
-          <div class="card-title">Revisión Gases</div>
-          <div class="card-description">Updated: 01/08/2026</div>
-          <div class="card-description">Expires: 01/08/2027</div>
+        <div class="doc-row">
+          <span class="row-label">Revisión Gases</span>
+          <div style="text-align: right;">
+            <div class="row-value">Updated: 01/08/2026</div>
+            <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
+          </div>
         </div>
 
-        <div class="glass-card doc-card">
-          <div class="card-title">SOAP</div>
-          <div class="card-description">Updated: 01/04/2026</div>
-          <div class="card-description">Expires: 31/03/2027</div>
+        <div class="doc-row">
+          <span class="row-label">SOAP</span>
+          <div style="text-align: right;">
+            <div class="row-value">Updated: 01/04/2026</div>
+            <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
+          </div>
         </div>
 
-        <div class="glass-card doc-card">
-          <div class="card-title">Seguro Vehículo</div>
-          <div class="card-description">Updated: 01/09/2026</div>
-          <div class="card-description">Expires: 01/09/2027</div>
+        <div class="doc-row">
+          <span class="row-label">Seguro Vehículo</span>
+          <div style="text-align: right;">
+            <div class="row-value">Updated: 01/09/2026</div>
+            <div class="row-value row-value-secondary">Expires: 01/09/2027</div>
+          </div>
         </div>
 
-        <div class="glass-card doc-card">
-          <div class="card-title">Extintor</div>
-          <div class="card-description">Updated: 20/03/2026</div>
-          <div class="card-description">Expires: 20/03/2027</div>
+        <div class="doc-row">
+          <span class="row-label">Extintor</span>
+          <div style="text-align: right;">
+            <div class="row-value">Updated: 20/03/2026</div>
+            <div class="row-value row-value-secondary">Expires: 20/03/2027</div>
+          </div>
         </div>
 
-        <div class="glass-card doc-card">
-          <div class="card-title">Cambio de Aceite</div>
-          <div class="card-description">10/09/2026</div>
-          <div class="card-description">Next: 70.000 Km</div>
+        <div class="doc-row">
+          <span class="row-label">Cambio de Aceite</span>
+          <div style="text-align: right;">
+            <div class="row-value">10/09/2026</div>
+            <div class="row-value row-value-secondary">Next: 70.000 Km</div>
+          </div>
         </div>
       </div>
     </section>
@@ -449,19 +475,23 @@
     <section class="dashboard-page">
       <h2 class="section-title">Maintenance History</h2>
 
-      <div class="maintenance-list">
-        <div class="glass-card maintenance-card">
-          <div class="card-title">10/08/2026</div>
-          <div class="card-description">60.000 Km Service</div>
-          <div class="card-description">$420.000</div>
-          <div class="card-description">Oil + Filters + Inspection</div>
+      <div class="maintenance-rows">
+        <div class="maintenance-row">
+          <span class="row-label">10/08/2026</span>
+          <div style="text-align: right;">
+            <div class="row-value">60.000 Km Service</div>
+            <div class="row-value row-value-secondary" style="color: var(--color-accent);">$420.000</div>
+            <div class="row-value row-value-secondary">Oil + Filters + Inspection</div>
+          </div>
         </div>
 
-        <div class="glass-card maintenance-card">
-          <div class="card-title">15/03/2026</div>
-          <div class="card-description">Brake Replacement</div>
-          <div class="card-description">$180.000</div>
-          <div class="card-description">Front Brakes</div>
+        <div class="maintenance-row">
+          <span class="row-label">15/03/2026</span>
+          <div style="text-align: right;">
+            <div class="row-value">Brake Replacement</div>
+            <div class="row-value row-value-secondary" style="color: var(--color-accent);">$180.000</div>
+            <div class="row-value row-value-secondary">Front Brakes</div>
+          </div>
         </div>
       </div>
     </section>
