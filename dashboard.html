@@ -111,6 +111,36 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      min-height: 0;
+      min-width: 0;
+    }
+
+    .carousel-tabs {
+      flex-shrink: 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      padding: 0 12px 8px;
+    }
+
+    .carousel-tab {
+      border: 1px solid rgba(138, 180, 255, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--color-text);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      min-height: 36px;
+      padding: 8px 12px;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .carousel-tab.active {
+      background: rgba(96, 165, 250, 0.18);
+      border-color: var(--color-accent);
+      color: var(--color-title);
     }
 
     .dashboard-carousel {
@@ -120,9 +150,13 @@
       overflow-y: hidden;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      scroll-padding-inline: 0;
       gap: 0;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x pinch-zoom;
     }
 
     .dashboard-carousel::-webkit-scrollbar {
@@ -132,12 +166,20 @@
     .dashboard-page {
       flex: 0 0 100%;
       width: 100%;
-      padding: 12px;
+      min-width: 100%;
+      max-width: 100%;
       scroll-snap-align: start;
+      scroll-snap-stop: always;
       box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .dashboard-page-scroll {
+      height: 100%;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      overscroll-behavior: contain;
+      overscroll-behavior-y: contain;
+      padding: 12px;
     }
 
     /* Dots for page carousel */
@@ -151,12 +193,16 @@
     }
 
     .dot {
+      appearance: none;
+      border: none;
       width: 8px;
       height: 8px;
       border-radius: 50%;
       background: rgba(148, 163, 184, 0.55);
       cursor: pointer;
+      padding: 0;
       transition: transform 0.2s ease, background 0.2s ease;
+      touch-action: manipulation;
     }
 
     .dot.active {
@@ -361,120 +407,129 @@
 
   <!-- DATA PAGES CAROUSEL SECTION (Fills remaining space, swipeable pages) -->
   <div class="dashboard-pages-container">
+    <div class="carousel-tabs" role="tablist" aria-label="Vehicle information pages">
+      <button type="button" class="carousel-tab active" data-page="0" role="tab" aria-selected="true">Vehicle</button>
+      <button type="button" class="carousel-tab" data-page="1" role="tab" aria-selected="false">Documents</button>
+      <button type="button" class="carousel-tab" data-page="2" role="tab" aria-selected="false">Maintenance</button>
+    </div>
     <div id="dashboardCarousel" class="dashboard-carousel">
       <!-- PAGE 1: Vehicle Information -->
       <section class="dashboard-page">
-        <h2 class="section-title">Vehicle Information</h2>
+        <div class="dashboard-page-scroll">
+          <h2 class="section-title">Vehicle Information</h2>
 
-        <div class="info-rows">
-          <div class="info-row">
-            <span class="row-label">Brand</span>
-            <span class="row-value">Toyota</span>
-          </div>
+          <div class="info-rows">
+            <div class="info-row">
+              <span class="row-label">Brand</span>
+              <span class="row-value">Toyota</span>
+            </div>
 
-          <div class="info-row">
-            <span class="row-label">Model</span>
-            <span class="row-value">Hilux SRX</span>
-          </div>
+            <div class="info-row">
+              <span class="row-label">Model</span>
+              <span class="row-value">Hilux SRX</span>
+            </div>
 
-          <div class="info-row">
-            <span class="row-label">Year</span>
-            <span class="row-value">2023</span>
-          </div>
+            <div class="info-row">
+              <span class="row-label">Year</span>
+              <span class="row-value">2023</span>
+            </div>
 
-          <div class="info-row">
-            <span class="row-label">Plate</span>
-            <span class="row-value">RXTT22</span>
-          </div>
+            <div class="info-row">
+              <span class="row-label">Plate</span>
+              <span class="row-value">RXTT22</span>
+            </div>
 
-          <div class="info-row">
-            <span class="row-label">Color</span>
-            <span class="row-value">White</span>
-          </div>
+            <div class="info-row">
+              <span class="row-label">Color</span>
+              <span class="row-value">White</span>
+            </div>
 
-          <div class="info-row">
-            <span class="row-label">VIN</span>
-            <span class="row-value">JT123456789</span>
-          </div>
+            <div class="info-row">
+              <span class="row-label">VIN</span>
+              <span class="row-value">JT123456789</span>
+            </div>
 
-          <div class="info-row">
-            <span class="row-label">Mileage</span>
-            <span class="row-value">58.425 Km</span>
-          </div>
+            <div class="info-row">
+              <span class="row-label">Mileage</span>
+              <span class="row-value">58.425 Km</span>
+            </div>
 
-          <div class="info-row">
-            <span class="row-label">City</span>
-            <span class="row-value">Santiago</span>
+            <div class="info-row">
+              <span class="row-label">City</span>
+              <span class="row-value">Santiago</span>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- PAGE 2: Vehicle Documentation -->
       <section class="dashboard-page">
-        <h2 class="section-title">Vehicle Documentation</h2>
+        <div class="dashboard-page-scroll">
+          <h2 class="section-title">Vehicle Documentation</h2>
 
-        <div class="documents-rows">
-          <div class="doc-row">
-            <span class="row-label">Padrón</span>
-            <div style="text-align: right;">
-              <div class="row-value">Updated: 01/01/2026</div>
-              <div class="row-value row-value-secondary">Permanent</div>
+          <div class="documents-rows">
+            <div class="doc-row">
+              <span class="row-label">Padrón</span>
+              <div style="text-align: right;">
+                <div class="row-value">Updated: 01/01/2026</div>
+                <div class="row-value row-value-secondary">Permanent</div>
+              </div>
             </div>
-          </div>
 
-          <div class="doc-row">
-            <span class="row-label">Permiso Circulación</span>
-            <div style="text-align: right;">
-              <div class="row-value">Updated: 01/04/2026</div>
-              <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
+            <div class="doc-row">
+              <span class="row-label">Permiso Circulación</span>
+              <div style="text-align: right;">
+                <div class="row-value">Updated: 01/04/2026</div>
+                <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
+              </div>
             </div>
-          </div>
 
-          <div class="doc-row">
-            <span class="row-label">Revisión Técnica</span>
-            <div style="text-align: right;">
-              <div class="row-value">Updated: 01/08/2026</div>
-              <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
+            <div class="doc-row">
+              <span class="row-label">Revisión Técnica</span>
+              <div style="text-align: right;">
+                <div class="row-value">Updated: 01/08/2026</div>
+                <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
+              </div>
             </div>
-          </div>
 
-          <div class="doc-row">
-            <span class="row-label">Revisión Gases</span>
-            <div style="text-align: right;">
-              <div class="row-value">Updated: 01/08/2026</div>
-              <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
+            <div class="doc-row">
+              <span class="row-label">Revisión Gases</span>
+              <div style="text-align: right;">
+                <div class="row-value">Updated: 01/08/2026</div>
+                <div class="row-value row-value-secondary">Expires: 01/08/2027</div>
+              </div>
             </div>
-          </div>
 
-          <div class="doc-row">
-            <span class="row-label">SOAP</span>
-            <div style="text-align: right;">
-              <div class="row-value">Updated: 01/04/2026</div>
-              <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
+            <div class="doc-row">
+              <span class="row-label">SOAP</span>
+              <div style="text-align: right;">
+                <div class="row-value">Updated: 01/04/2026</div>
+                <div class="row-value row-value-secondary">Expires: 31/03/2027</div>
+              </div>
             </div>
-          </div>
 
-          <div class="doc-row">
-            <span class="row-label">Seguro Vehículo</span>
-            <div style="text-align: right;">
-              <div class="row-value">Updated: 01/09/2026</div>
-              <div class="row-value row-value-secondary">Expires: 01/09/2027</div>
+            <div class="doc-row">
+              <span class="row-label">Seguro Vehículo</span>
+              <div style="text-align: right;">
+                <div class="row-value">Updated: 01/09/2026</div>
+                <div class="row-value row-value-secondary">Expires: 01/09/2027</div>
+              </div>
             </div>
-          </div>
 
-          <div class="doc-row">
-            <span class="row-label">Extintor</span>
-            <div style="text-align: right;">
-              <div class="row-value">Updated: 20/03/2026</div>
-              <div class="row-value row-value-secondary">Expires: 20/03/2027</div>
+            <div class="doc-row">
+              <span class="row-label">Extintor</span>
+              <div style="text-align: right;">
+                <div class="row-value">Updated: 20/03/2026</div>
+                <div class="row-value row-value-secondary">Expires: 20/03/2027</div>
+              </div>
             </div>
-          </div>
 
-          <div class="doc-row">
-            <span class="row-label">Cambio de Aceite</span>
-            <div style="text-align: right;">
-              <div class="row-value">10/09/2026</div>
-              <div class="row-value row-value-secondary">Next: 70.000 Km</div>
+            <div class="doc-row">
+              <span class="row-label">Cambio de Aceite</span>
+              <div style="text-align: right;">
+                <div class="row-value">10/09/2026</div>
+                <div class="row-value row-value-secondary">Next: 70.000 Km</div>
+              </div>
             </div>
           </div>
         </div>
@@ -482,24 +537,26 @@
 
       <!-- PAGE 3: Maintenance History -->
       <section class="dashboard-page">
-        <h2 class="section-title">Maintenance History</h2>
+        <div class="dashboard-page-scroll">
+          <h2 class="section-title">Maintenance History</h2>
 
-        <div class="maintenance-rows">
-          <div class="maintenance-row">
-            <span class="row-label">10/08/2026</span>
-            <div style="text-align: right;">
-              <div class="row-value">60.000 Km Service</div>
-              <div class="row-value row-value-secondary" style="color: var(--color-accent);">$420.000</div>
-              <div class="row-value row-value-secondary">Oil + Filters + Inspection</div>
+          <div class="maintenance-rows">
+            <div class="maintenance-row">
+              <span class="row-label">10/08/2026</span>
+              <div style="text-align: right;">
+                <div class="row-value">60.000 Km Service</div>
+                <div class="row-value row-value-secondary" style="color: var(--color-accent);">$420.000</div>
+                <div class="row-value row-value-secondary">Oil + Filters + Inspection</div>
+              </div>
             </div>
-          </div>
 
-          <div class="maintenance-row">
-            <span class="row-label">15/03/2026</span>
-            <div style="text-align: right;">
-              <div class="row-value">Brake Replacement</div>
-              <div class="row-value row-value-secondary" style="color: var(--color-accent);">$180.000</div>
-              <div class="row-value row-value-secondary">Front Brakes</div>
+            <div class="maintenance-row">
+              <span class="row-label">15/03/2026</span>
+              <div style="text-align: right;">
+                <div class="row-value">Brake Replacement</div>
+                <div class="row-value row-value-secondary" style="color: var(--color-accent);">$180.000</div>
+                <div class="row-value row-value-secondary">Front Brakes</div>
+              </div>
             </div>
           </div>
         </div>
@@ -508,9 +565,9 @@
 
     <!-- DOTS for page carousel -->
     <div class="carousel-dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+      <button type="button" class="dot active" data-page="0" aria-label="Go to Vehicle page"></button>
+      <button type="button" class="dot" data-page="1" aria-label="Go to Documents page"></button>
+      <button type="button" class="dot" data-page="2" aria-label="Go to Maintenance page"></button>
     </div>
   </div>
 
@@ -547,15 +604,132 @@
   </nav>
 
   <script>
-    // Dashboard carousel dots sync
     const carousel = document.getElementById("dashboardCarousel");
+    const pageTabs = document.querySelectorAll(".carousel-tab");
     const dots = document.querySelectorAll(".dot");
+    const pages = carousel.querySelectorAll(".dashboard-page");
+    const swipeThreshold = 32;
+    let activePage = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartPage = 0;
+
+    function getPageWidth() {
+      return carousel.getBoundingClientRect().width || carousel.clientWidth;
+    }
+
+    function clampPage(page) {
+      return Math.max(0, Math.min(page, pages.length - 1));
+    }
+
+    function updateActiveState(page) {
+      activePage = clampPage(page);
+
+      pageTabs.forEach((tab, index) => {
+        const isActive = index === activePage;
+        tab.classList.toggle("active", isActive);
+        tab.setAttribute("aria-selected", String(isActive));
+      });
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === activePage);
+      });
+    }
+
+    function scrollToPage(page, behavior = "smooth") {
+      updateActiveState(page);
+      carousel.scrollTo({
+        left: getPageWidth() * activePage,
+        behavior,
+      });
+    }
+
+    function getClosestPage() {
+      const pageWidth = getPageWidth();
+      if (!pageWidth) {
+        return activePage;
+      }
+
+      return clampPage(Math.round(carousel.scrollLeft / pageWidth));
+    }
+
+    function bindPageControls(elements) {
+      elements.forEach((element) => {
+        element.addEventListener("click", () => {
+          scrollToPage(Number(element.dataset.page));
+        });
+      });
+    }
+
+    bindPageControls(pageTabs);
+    bindPageControls(dots);
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              updateActiveState(Number(entry.target.dataset.page));
+            }
+          });
+        },
+        {
+          root: carousel,
+          threshold: 0.6,
+        }
+      );
+
+      pages.forEach((page, index) => {
+        page.dataset.page = index;
+        observer.observe(page);
+      });
+    }
 
     carousel.addEventListener("scroll", () => {
-      const page = Math.round(carousel.scrollLeft / carousel.clientWidth);
-      dots.forEach((dot) => dot.classList.remove("active"));
-      if (dots[page]) dots[page].classList.add("active");
+      updateActiveState(getClosestPage());
     });
+
+    carousel.addEventListener(
+      "touchstart",
+      (event) => {
+        if (event.target.closest("[data-preserve-horizontal-scroll]")) {
+          return;
+        }
+
+        const touch = event.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        touchStartPage = getClosestPage();
+      },
+      { passive: true }
+    );
+
+    carousel.addEventListener(
+      "touchend",
+      (event) => {
+        if (!event.changedTouches.length) {
+          return;
+        }
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+          scrollToPage(touchStartPage + (deltaX < 0 ? 1 : -1));
+          return;
+        }
+
+        scrollToPage(getClosestPage());
+      },
+      { passive: true }
+    );
+
+    window.addEventListener("resize", () => {
+      scrollToPage(activePage, "auto");
+    });
+
+    updateActiveState(0);
 
     // Image modal functionality
     function openImageModal(cardElement) {
